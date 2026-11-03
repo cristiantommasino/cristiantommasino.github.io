@@ -54,20 +54,24 @@ Metti `draft: false` per pubblicarle.
 
 ## Pubblicare su GitHub Pages (la prima volta)
 
-1. Su GitHub crea un repository **pubblico** chiamato `cristian921.github.io`
-   (con questo nome il sito sarà su `https://cristian921.github.io`; con un altro nome, ad esempio `website`,
-   sarà su `https://cristian921.github.io/website/`: funziona comunque, i link si adattano da soli).
-2. Dalla cartella del progetto:
+Il sito è ospitato da un'organizzazione GitHub gratuita, `cristiantommasino`, così l'indirizzo è
+`https://cristiantommasino.github.io` senza rinominare l'account personale `cristian921`.
+
+1. Crea l'organizzazione: su GitHub, **+ → New organization → Free**, nome `cristiantommasino`,
+   "My personal account" come proprietario.
+2. Nell'organizzazione crea un repository **pubblico** e **vuoto** (senza README) chiamato esattamente
+   `cristiantommasino.github.io`.
+3. Dalla cartella del progetto:
    ```bash
-   git init -b main
-   git add .
-   git commit -m "Initial website"
-   git remote add origin https://github.com/cristian921/cristian921.github.io.git
+   git remote add origin https://github.com/cristiantommasino/cristiantommasino.github.io.git
    git push -u origin main
    ```
-3. Su GitHub: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-4. Il workflow `.github/workflows/deploy.yml` parte a ogni push; dopo 1–2 minuti il sito è online
+4. Nel repository: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+5. Il workflow `.github/workflows/deploy.yml` parte a ogni push; dopo 1–2 minuti il sito è online
    (lo stato si vede nella scheda **Actions**).
+
+Con un repository di nome diverso (es. `website`) il sito sarebbe su
+`https://cristiantommasino.github.io/website/`: funziona comunque, i link si adattano da soli.
 
 ### Dominio personalizzato (facoltativo)
 In **Settings → Pages → Custom domain** inserisci il dominio (es. `cristiantommasino.it`) e configura il DNS

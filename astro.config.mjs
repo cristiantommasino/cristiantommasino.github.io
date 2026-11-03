@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 
 // SITE_URL / BASE_PATH are set by the GitHub Pages workflow.
 // With a repository named "<username>.github.io" the base path is "/".
-const site = process.env.SITE_URL || 'https://cristian921.github.io';
+const site = process.env.SITE_URL || 'https://cristiantommasino.github.io';
 const base = process.env.BASE_PATH || '/';
 
 export default defineConfig({
