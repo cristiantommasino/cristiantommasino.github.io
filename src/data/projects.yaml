@@ -1,0 +1,101 @@
+# ------------------------------------------------------------------
+# Projects shown on /projects.
+#   status: active | released | completed | planned
+#   kind: free text shown as a label (Software, Research project, Workshop, ...)
+#   period: free text, e.g. "2024 – present"
+#   links: list of {label, url}
+#   papers: optional BibTeX keys
+# ------------------------------------------------------------------
+
+- title: PathJev
+  kind: Software · Research
+  status: active
+  period: 2026 – present
+  description: >-
+    A calibrated, decision-native vision-language model for histopathology, built on
+    MedGemma with a dedicated decision head, so that answers to clinical questions come
+    with reliable confidence.
+  links:
+    - label: Code
+      url: https://github.com/CosmoIknosLab/PathJev
+    - label: arXiv
+      url: https://arxiv.org/abs/2610.32478
+  papers: [tommasino2026pathjev]
+
+- title: EarthJev
+  kind: Software · Research
+  status: active
+  period: 2026 – present
+  description: >-
+    The same decision-native approach applied to remote sensing: calibrated, non-generative
+    answers to natural-language questions about 12-band Sentinel-2 satellite images.
+  links:
+    - label: Code
+      url: https://github.com/CosmoIknosLab/EarthJev
+    - label: arXiv
+      url: https://arxiv.org/abs/2611.02096
+  papers: [benfenati2026earthjev]
+
+- title: NuLite
+  kind: Open-source software
+  status: released
+  period: 2024
+  description: >-
+    Lightweight and fast model for nuclei instance segmentation and classification, with a
+    FastViT encoder in a U-Net-like architecture. Supports tile and whole-slide inference
+    with QuPath output; pretrained weights (NuLite-T/M/H) are available on Zenodo.
+  links:
+    - label: Code
+      url: https://github.com/CosmoIknosLab/NuLite
+    - label: arXiv
+      url: https://arxiv.org/abs/2408.01797
+  papers: [tommasino2026nulite]
+
+- title: HoVer-UNet
+  kind: Open-source software
+  status: released
+  period: 2023 – 2024
+  description: >-
+    HoVerNet distilled into a single U-Net for multi-class nuclei segmentation, about three
+    times faster at inference with comparable accuracy. Developed with the Computational
+    Pathology Group at Radboud University Medical Center (Nijmegen).
+  links:
+    - label: Code
+      url: https://github.com/DIAGNijmegen/HoVer-UNet
+    - label: Weights
+      url: https://zenodo.org/records/10101807
+  papers: [tommasino2024hoverunet]
+
+- title: AIBio 2025 – Workshop on AI for Biomedical Data
+  kind: Workshop
+  status: completed
+  period: 2025
+  description: >-
+    First edition of the Workshop on Artificial Intelligence for Biomedical Data, held with
+    ECAI 2025 in Bologna (25–26 October 2025). Proceedings published in Springer CCIS,
+    vol. 2696.
+  links:
+    - label: Website
+      url: https://wsaibio.github.io/ecai2025
+    - label: Proceedings
+      url: https://doi.org/10.1007/978-3-032-17216-7
+
+- title: CINI-AIIS national laboratory – Naples node
+  kind: Research network
+  period: 2023 – 2025
+  description: >-
+    Participation in the activities of the Naples Federico II node of the CINI national
+    laboratory on Artificial Intelligence and Intelligent Systems, on AI for healthcare
+    and generative AI.
+  links: []
+  papers: [barone2025ciniaiis, benfenati2024medicine, bosco2023healthcare]
+
+# Example of a funded project:
+# - title: Project name (ACRONYM)
+#   kind: Funded project
+#   status: active
+#   period: 2025 – 2027
+#   description: One or two sentences. Funded by ..., role: participant / PI.
+#   links:
+#     - label: Website
+#       url: https://...

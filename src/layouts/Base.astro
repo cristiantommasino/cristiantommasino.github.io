@@ -1,0 +1,157 @@
+---
+import '@fontsource-variable/source-serif-4/opsz.css';
+import '@fontsource/ibm-plex-sans/latin-400.css';
+import '@fontsource/ibm-plex-sans/latin-400-italic.css';
+import '@fontsource/ibm-plex-sans/latin-500.css';
+import '@fontsource/ibm-plex-sans/latin-600.css';
+import '@fontsource/ibm-plex-mono/latin-400.css';
+import '../styles/global.css';
+import Icon from '../components/Icon.astro';
+import CellGraph from '../components/CellGraph.astro';
+import { profile, url } from '../lib/data';
+
+interface Props {
+  title?: string;
+  description?: string;
+  jsonld?: object;
+}
+const { title, description = profile.seo_description, jsonld } = Astro.props;
+const fullTitle = title ? `${title} · ${profile.name}` : `${profile.name} · ${profile.role}, ${profile.university}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(url('og.png'), Astro.site);
+
+const nav = [
+  { href: '', label: 'About' },
+  { href: 'research/', label: 'Research' },
+  { href: 'publications/', label: 'Publications' },
+  { href: 'projects/', label: 'Projects' },
+  { href: 'service/', label: 'Service' },
+  { href: 'teaching/', label: 'Teaching' },
+  { href: 'news/', label: 'News' },
+  { href: 'contact/', label: 'Contact' },
+];
+const here = Astro.url.pathname.replace(/\/?$/, '/');
+const isCurrent = (href: string) => here === url(href).replace(/\/?$/, '/');
+const year = new Date().getFullYear();
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={profile.name} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href={url('favicon.svg')} type="image/svg+xml" />
+    <link rel="sitemap" href={url('sitemap-index.xml')} />
+    <meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#131219" media="(prefers-color-scheme: dark)" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={profile.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${profile.name} — ${profile.tagline}`} />
+    <meta property="og:locale" content="en_GB" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    {jsonld && <script type="application/ld+json" set:html={JSON.stringify(jsonld)} />}
+
+    <script is:inline>
+      // Apply the saved theme before first paint to avoid a flash.
+      (function () {
+        var d = document.documentElement;
+        d.classList.add('js');
+        try {
+          var t = localStorage.getItem('theme');
+          if (t === 'light' || t === 'dark') d.setAttribute('data-theme', t);
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href={url('')}>
+          <CellGraph />
+          <span>{profile.name}</span>
+        </a>
+        <nav class="nav" id="site-nav" aria-label="Main">
+          <ul>
+            {nav.map((n) => (
+              <li>
+                <a href={url(n.href)} aria-current={isCurrent(n.href) ? 'page' : undefined}>{n.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <button class="icon-btn theme-btn" type="button" aria-label="Switch between light and dark theme">
+          <span class="sun"><Icon name="moon" /></span>
+          <span class="moon"><Icon name="sun" /></span>
+        </button>
+        <button class="icon-btn menu-btn" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Menu">
+          <Icon name="menu" />
+        </button>
+      </div>
+    </header>
+
+    <main id="main">
+      <div class="wrap">
+        <slot />
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <address>
+          <strong>{profile.name}</strong><br />
+          {profile.role}<br />
+          {profile.department}<br />
+          {profile.university} · {profile.address.join(', ')}<br />
+          <a href={`mailto:${profile.links.email}`}>{profile.links.email}</a>
+        </address>
+        <p class="mono" style="font-size:0.8rem;margin:0">
+          © {year} {profile.name}<br />
+          <a href={url('feed.xml')}>News feed</a>
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      const root = document.documentElement;
+      const themeBtn = document.querySelector<HTMLButtonElement>('.theme-btn');
+      const media = window.matchMedia('(prefers-color-scheme: dark)');
+      const effective = () => root.getAttribute('data-theme') || (media.matches ? 'dark' : 'light');
+      // Keep the toggle's icon in sync with the effective theme.
+      const sync = () => root.setAttribute('data-theme', effective());
+      sync();
+      media.addEventListener('change', () => {
+        let saved = null;
+        try { saved = localStorage.getItem('theme'); } catch {}
+        if (!saved) root.setAttribute('data-theme', media.matches ? 'dark' : 'light');
+      });
+      themeBtn?.addEventListener('click', () => {
+        const next = effective() === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('theme', next); } catch {}
+      });
+
+      const menuBtn = document.querySelector<HTMLButtonElement>('.menu-btn');
+      const nav = document.getElementById('site-nav');
+      menuBtn?.addEventListener('click', () => {
+        const open = menuBtn.getAttribute('aria-expanded') !== 'true';
+        menuBtn.setAttribute('aria-expanded', String(open));
+        nav?.classList.toggle('open', open);
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import { service, inlineMd, profile } from '../lib/data';
+
+const groups = service.filter((g) => g.items && g.items.length > 0);
+---
+<Base title="Service & Activities" description={`Workshop organisation, editorial work, programme committees and peer review by ${profile.name}.`}>
+  <header class="page-head">
+    <p class="eyebrow">Service</p>
+    <h1>Service and activities</h1>
+    <p>Workshop organisation, editorial and programme-committee work, peer review and talks.</p>
+  </header>
+
+  {groups.map((g, i) => (
+    <section class="section" aria-labelledby={`sg${i}`} style="margin-top:2.25rem">
+      <div class="section-head"><h2 id={`sg${i}`}>{g.group}</h2></div>
+      <ul class="item-list">
+        {g.items.map((it) => (
+          <li>
+            <span set:html={inlineMd(it.what)} />
+            <span class="when">{it.when}</span>
+            {it.detail && <span class="detail" set:html={inlineMd(it.detail)} />}
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</Base>

@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+import { projects, pubByKey, url, profile } from '../lib/data';
+
+const STATUS: Record<string, string> = {
+  active: 'Active',
+  released: 'Released',
+  completed: 'Completed',
+  planned: 'Planned',
+};
+const current = projects.filter((p) => p.status === 'active' || p.status === 'released' || p.status === 'planned');
+const past = projects.filter((p) => !current.includes(p));
+const groups = [
+  { id: 'current', title: 'Ongoing and released', items: current },
+  { id: 'past', title: 'Past and other activities', items: past },
+].filter((g) => g.items.length);
+---
+<Base title="Projects" description={`Research projects and open-source software by ${profile.name}.`}>
+  <header class="page-head">
+    <p class="eyebrow">Projects</p>
+    <h1>Projects and software</h1>
+    <p>Research projects, open-source tools and community initiatives I lead or contribute to.</p>
+  </header>
+
+  {groups.map((g) => (
+    <section class="section" aria-labelledby={`h-${g.id}`} style="margin-top:2rem">
+      <div class="section-head"><h2 id={`h-${g.id}`}>{g.title}</h2></div>
+      <div class="grid-2">
+        {g.items.map((p) => (
+          <article class="card project-card">
+            <header>
+              <span class="badge">{p.kind}</span>
+              {p.status && <span class={`status ${p.status}`}>{STATUS[p.status] || p.status}</span>}
+            </header>
+            <h3>{p.title}</h3>
+            <p class="mono muted" style="font-size:0.8rem">{p.period}</p>
+            <p>{p.description}</p>
+            {p.papers && p.papers.length > 0 && (
+              <p style="font-size:0.88rem">
+                <span class="muted">Papers: </span>
+                {p.papers.map((k) => pubByKey.get(k)).filter(Boolean).map((pub, i, arr) => (
+                  <>
+                    <a href={url(`publications/#${pub!.key}`)}>{pub!.abbr || pub!.venue} {pub!.year}</a>
+                    {i < arr.length - 1 ? ', ' : ''}
+                  </>
+                ))}
+              </p>
+            )}
+            {p.links?.length > 0 && (
+              <div class="links pub-links">
+                {p.links.map((l) => <a href={l.url} rel="noopener" aria-label={`${l.label}: ${p.title}`}>{l.label}</a>)}
+              </div>
+            )}
+          </article>
+        ))}
+      </div>
+    </section>
+  ))}
+</Base>

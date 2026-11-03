@@ -1,0 +1,74 @@
+---
+import Base from '../layouts/Base.astro';
+import { teaching, profile } from '../lib/data';
+
+// Draft proposals are shown only in the local preview (npm run dev), never on the live site.
+const proposals = teaching.proposals.filter((p) => !p.draft || import.meta.env.DEV);
+const theses = teaching.supervision.theses || [];
+---
+<Base title="Teaching & Students" description={`Courses, supervised theses and open thesis proposals by ${profile.name} at the University of Naples Federico II.`}>
+  <header class="page-head">
+    <p class="eyebrow">Teaching</p>
+    <h1>Teaching and students</h1>
+    <p>Courses I teach at the University of Naples Federico II, theses I have supervised, and open proposals for students.</p>
+  </header>
+
+  <section class="section" aria-labelledby="h-courses" style="margin-top:2rem">
+    <div class="section-head"><h2 id="h-courses">Courses</h2></div>
+    <ul class="item-list">
+      {teaching.courses.map((c) => (
+        <li>
+          <span>
+            {c.url ? <a href={c.url} rel="noopener">{c.name}</a> : c.name}
+            {c.credits && <span class="muted"> · {c.credits}</span>}
+          </span>
+          <span class="when">{c.years}</span>
+          <span class="detail">{c.programme}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="h-sup">
+    <div class="section-head"><h2 id="h-sup">Supervision</h2></div>
+    <p class="prose">{teaching.supervision.summary}</p>
+    {theses.length > 0 && (
+      <ul class="item-list">
+        {theses.map((t) => (
+          <li>
+            <span><strong style="font-weight:500">{t.student}</strong> · {t.title}</span>
+            <span class="when">{t.year}</span>
+            <span class="detail">{t.level} thesis, {t.role}</span>
+          </li>
+        ))}
+      </ul>
+    )}
+  </section>
+
+  <section class="section" aria-labelledby="h-prop" lang="it">
+    <div class="section-head"><h2 id="h-prop">Proposte di tesi e tirocinio</h2></div>
+    <p class="prose">{teaching.proposals_intro}</p>
+    {proposals.length > 0 ? (
+      <div class="grid-2">
+        {proposals.map((p) => (
+          <article class={`card project-card${p.draft ? ' draft-flag' : ''}`}>
+            <header>
+              <span class="badge">{p.level}</span>
+              {p.draft && <span class="badge eosin">Bozza · visibile solo in anteprima</span>}
+            </header>
+            <h3>{p.title}</h3>
+            <p>{p.description}</p>
+            {p.skills && (
+              <p class="mono muted" style="font-size:0.8rem">{p.skills.join(' · ')}</p>
+            )}
+          </article>
+        ))}
+      </div>
+    ) : (
+      <p class="muted">Al momento non ci sono proposte pubblicate: scrivimi per discutere un tema.</p>
+    )}
+    <p style="margin-top:1.25rem">
+      <a href={`mailto:${profile.links.email}?subject=${encodeURIComponent('Proposta di tesi')}`}>Scrivimi: {profile.links.email}</a>
+    </p>
+  </section>
+</Base>

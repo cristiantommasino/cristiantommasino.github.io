@@ -1,0 +1,88 @@
+---
+import Base from '../layouts/Base.astro';
+import QuickLinks from '../components/QuickLinks.astro';
+import NewsList from '../components/NewsList.astro';
+import PubItem from '../components/PubItem.astro';
+import CopyBibtex from '../components/CopyBibtex.astro';
+import { profile, research, news, publications, url, inlineMd, photoExists } from '../lib/data';
+
+const hasPhoto = photoExists();
+const initials = profile.name.split(' ').map((p) => p[0]).join('');
+const selected = publications.filter((p) => p.selected).slice(0, 5);
+
+const sameAs = [profile.links.orcid, profile.links.scholar, profile.links.github, profile.links.linkedin, profile.links.dblp, profile.lab_url].filter(Boolean);
+const jsonld = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: profile.name,
+  jobTitle: profile.role,
+  email: `mailto:${profile.links.email}`,
+  url: Astro.site?.toString(),
+  image: hasPhoto ? new URL(url(profile.photo), Astro.site).toString() : undefined,
+  affiliation: {
+    '@type': 'CollegeOrUniversity',
+    name: profile.university,
+    department: { '@type': 'Organization', name: profile.department },
+  },
+  knowsAbout: ['Computational pathology', 'Nuclei segmentation', 'Graph neural networks', 'Vision-language models', 'Knowledge graphs', 'Information retrieval'],
+  sameAs,
+};
+---
+<Base jsonld={jsonld}>
+  <section class="hero" aria-labelledby="hero-name">
+    <div>
+      <p class="eyebrow">{profile.department_short} · {profile.university}</p>
+      <h1 id="hero-name">{profile.name}</h1>
+      <p class="role">{profile.role}, <a href={profile.lab_url} rel="noopener">{profile.lab}</a></p>
+      <p class="tagline">{profile.tagline}</p>
+      <p class="bio">{profile.bio_short}</p>
+      <QuickLinks />
+      <details class="long-bio">
+        <summary>Read the full bio</summary>
+        {profile.bio_long.map((p) => <p set:html={inlineMd(p)} />)}
+      </details>
+    </div>
+    <div class="hero-figure">
+      {hasPhoto ? (
+        <img class="portrait" src={url(profile.photo)} alt={profile.photo_alt} width="230" height="288" />
+      ) : (
+        <div class="portrait portrait-fallback" role="img" aria-label={`${profile.name} (photo coming soon)`}>{initials}</div>
+      )}
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="h-research">
+    <div class="section-head">
+      <h2 id="h-research">Research</h2>
+      <a class="more" href={url('research/')}>All research lines →</a>
+    </div>
+    <div class="grid-2">
+      {research.map((r, i) => (
+        <a class="card" href={url(`research/#${r.id}`)}>
+          <p class="eyebrow" style="margin-bottom:0.3rem">{String(i + 1).padStart(2, '0')}</p>
+          <h3>{r.title}</h3>
+          <p>{r.short}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="h-news">
+    <div class="section-head">
+      <h2 id="h-news">News</h2>
+      <a class="more" href={url('news/')}>All news →</a>
+    </div>
+    <NewsList items={news.slice(0, 5)} />
+  </section>
+
+  <section class="section" aria-labelledby="h-pubs">
+    <div class="section-head">
+      <h2 id="h-pubs">Selected publications</h2>
+      <a class="more" href={url('publications/')}>All publications →</a>
+    </div>
+    <ul class="pub-list">
+      {selected.map((p) => <PubItem pub={p} />)}
+    </ul>
+  </section>
+  <CopyBibtex />
+</Base>

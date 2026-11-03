@@ -1,0 +1,46 @@
+---
+import { PUB_TYPES, type Publication } from '../lib/data';
+
+interface Props {
+  pub: Publication;
+  showBibtex?: boolean;
+}
+const { pub, showBibtex = true } = Astro.props;
+const typeLabel = PUB_TYPES[pub.type] || pub.type;
+const searchText = [pub.title, pub.venue, pub.abbr, ...pub.authors.map((a) => a.name)].join(' ').toLowerCase();
+---
+<li class="pub" id={pub.key} data-type={pub.type} data-year={pub.year} data-search={searchText}>
+  <div class="pub-meta">
+    {pub.abbr && <span class="badge">{pub.abbr}</span>}
+    <span class="badge neutral">{typeLabel}</span>
+  </div>
+  <div>
+    <p class="pub-title">{pub.title}</p>
+    <p class="pub-authors">
+      {pub.authorRole === 'editors' && <span class="muted">Eds.: </span>}
+      {pub.authors.map((a, i) => (
+        <>
+          {a.me ? <strong>{a.name}</strong> : a.name}
+          {i < pub.authors.length - 1 ? ', ' : ''}
+        </>
+      ))}
+    </p>
+    <p class="pub-venue">
+      <em>{pub.venue}</em>{pub.details && `, ${pub.details}`}, {pub.year}
+    </p>
+    <div class="pub-links">
+      {pub.links.map((l) => (
+        <a href={l.url} rel="noopener" aria-label={`${l.label}: ${pub.title}`}>{l.label}</a>
+      ))}
+      {showBibtex && (
+        <details>
+          <summary aria-label={`BibTeX: ${pub.title}`}>BibTeX</summary>
+          <div class="bibtex">
+            <button class="btn-small copy" type="button" data-copy>Copy</button>
+            <pre><code>{pub.bibtex}</code></pre>
+          </div>
+        </details>
+      )}
+    </div>
+  </div>
+</li>

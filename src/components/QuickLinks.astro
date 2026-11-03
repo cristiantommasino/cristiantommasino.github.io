@@ -1,0 +1,25 @@
+---
+import Icon from './Icon.astro';
+import { profile, url } from '../lib/data';
+
+const l = profile.links;
+const items = [
+  l.email && { href: `mailto:${l.email}`, label: 'Email', icon: 'email', primary: true },
+  l.cv_pdf && { href: url(l.cv_pdf), label: 'CV (PDF)', icon: 'cv' },
+  l.scholar && { href: l.scholar, label: 'Google Scholar', icon: 'scholar' },
+  l.orcid && { href: l.orcid, label: 'ORCID', icon: 'orcid' },
+  l.github && { href: l.github, label: 'GitHub', icon: 'github' },
+  l.linkedin && { href: l.linkedin, label: 'LinkedIn', icon: 'linkedin' },
+  l.dblp && { href: l.dblp, label: 'dblp', icon: 'dblp' },
+].filter(Boolean) as { href: string; label: string; icon: string; primary?: boolean }[];
+---
+<ul class="quick-links">
+  {items.map((i) => (
+    <li class={i.primary ? 'primary' : undefined}>
+      <a href={i.href} rel={i.href.startsWith('http') ? 'noopener me' : undefined}>
+        <Icon name={i.icon} />
+        {i.label}
+      </a>
+    </li>
+  ))}
+</ul>

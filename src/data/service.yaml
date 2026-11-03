@@ -1,0 +1,49 @@
+# ------------------------------------------------------------------
+# Service & activities shown on /service.
+# Each group has a title and a list of items:
+#   what: main text (Markdown-style links allowed: [label](url))
+#   when: free text (year or range)
+#   detail: optional, shown in grey
+# Remove a group or leave items: [] to hide it.
+# ------------------------------------------------------------------
+
+- group: Workshop organisation
+  items:
+    - what: Workshop Chair and Publication Chair, 1st Workshop on Artificial Intelligence for Biomedical Data ([AIBio 2025](https://wsaibio.github.io/ecai2025)), held with ECAI 2025, Bologna, Italy
+      when: "2025"
+
+- group: Editorial activity
+  items:
+    - what: Co-editor (with C. Russo and M. Bernardini), *Artificial Intelligence for Biomedical Data – AIBio 2025 Proceedings*, Springer CCIS vol. 2696
+      when: "2026"
+      detail: "[doi:10.1007/978-3-032-17216-7](https://doi.org/10.1007/978-3-032-17216-7)"
+
+- group: Programme committees
+  items:
+    - what: Programme committee member, International Conference on Artificial Intelligence and Knowledge Engineering (AIKE)
+      when: ""
+      detail: Years to be added
+
+- group: Journal reviewing
+  items:
+    - what: '*Medical Image Analysis* (Elsevier)'
+      when: 2025 – 2026
+      detail: 4 reviews
+    - what: '*International Journal of Human-Computer Studies* (Elsevier)'
+      when: "2025"
+      detail: 1 review
+    - what: '*Soft Computing* (Springer Nature)'
+      when: 2023 – 2024
+      detail: 2 reviews
+
+- group: Talks
+  items: []
+  # - what: Talk title, Event, City
+  #   when: "2026"
+
+- group: Memberships and networks
+  items:
+    - what: Member of the [IKNOS Lab](https://iknos.dieti.unina.it/), DIETI, University of Naples Federico II
+      when: ""
+    - what: Contributor to the Naples Federico II node of the CINI-AIIS national laboratory
+      when: 2023 – 2025

@@ -1,0 +1,60 @@
+---
+import Base from '../layouts/Base.astro';
+import ResearchFigure from '../components/ResearchFigure.astro';
+import { research, pubByKey, url, profile } from '../lib/data';
+---
+<Base title="Research" description={`Research lines of ${profile.name}: computational pathology, cell graphs, vision-language models and knowledge graphs.`}>
+  <header class="page-head">
+    <p class="eyebrow">Research</p>
+    <h1>What I work on</h1>
+    <p>
+      My work sits between medical imaging and knowledge representation: teaching computers to read
+      histology slides cell by cell, to reason about how cells are organised, and to connect what
+      they see with language and structured knowledge.
+    </p>
+  </header>
+
+  {research.map((r, i) => (
+    <section class="research-line" id={r.id} aria-labelledby={`h-${r.id}`}>
+      <div>
+        <p class="eyebrow">{String(i + 1).padStart(2, '0')}</p>
+        <h2 id={`h-${r.id}`}>{r.title}</h2>
+        <p style="font-size:1.08rem">{r.description}</p>
+        <ul class="keywords" aria-label="Keywords">
+          {r.keywords.map((k) => <li class="badge neutral">{k}</li>)}
+        </ul>
+        <div class="related">
+          {r.papers?.length > 0 && (
+            <>
+              <h3>Key papers</h3>
+              <ul>
+                {r.papers.map((k) => pubByKey.get(k)).filter(Boolean).map((p) => (
+                  <li>
+                    <a href={url(`publications/#${p!.key}`)}>{p!.title}</a>
+                    <span class="muted"> · {p!.abbr || p!.venue} {p!.year}</span>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+          {r.code && r.code.length > 0 && (
+            <>
+              <h3>Code</h3>
+              <div class="pub-links">
+                {r.code.map((c) => <a href={c.url} rel="noopener">{c.label}</a>)}
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+      <figure class="research-figure">
+        {r.image ? (
+          <img src={url(r.image)} alt={r.image_alt} loading="lazy" />
+        ) : (
+          <ResearchFigure kind={r.figure} alt={r.image_alt} />
+        )}
+        {!r.image && <figcaption>Schematic illustration.</figcaption>}
+      </figure>
+    </section>
+  ))}
+</Base>

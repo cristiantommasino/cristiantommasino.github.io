@@ -1,0 +1,67 @@
+# ------------------------------------------------------------------
+# Teaching & students, shown on /teaching.
+# ------------------------------------------------------------------
+
+courses:
+  - name: Databases (Basi di Dati)
+    credits: 9 ECTS
+    programme: Computer Engineering (DE3), University of Naples Federico II
+    years: ""          # e.g. "2025/26 – present"
+    url: https://www.docenti.unina.it/cristian.tommasino
+  - name: Multimedia Systems (Sistemi Multimediali)
+    credits: ""
+    programme: Computer Engineering (N46), University of Naples Federico II
+    years: ""
+    url: https://www.docenti.unina.it/cristian.tommasino
+
+supervision:
+  summary: >-
+    Supervisor of several MSc theses in Management Engineering and co-supervisor of BSc and
+    MSc theses in Computer Engineering at the University of Naples Federico II.
+  # List individual theses here (newest first):
+  theses: []
+  # - student: Name Surname
+  #   level: MSc            # BSc | MSc | PhD
+  #   title: Thesis title
+  #   year: "2025"
+  #   role: supervisor      # supervisor | co-supervisor
+
+# Open thesis / internship proposals (shown in Italian, for UNINA students).
+# Set draft: false to publish a proposal. Drafts are visible only in local preview (npm run dev).
+proposals_intro: >-
+  Sei uno studente di Ingegneria Informatica (triennale o magistrale) interessato a
+  intelligenza artificiale e immagini mediche? Qui trovi alcune proposte di tesi e
+  tirocinio. Se un tema ti interessa, scrivimi un'email indicando il corso di laurea, gli
+  esami sostenuti e la data prevista di laurea.
+
+proposals:
+  - title: Segmentazione dei nuclei leggera su nuovi dataset istologici
+    level: Magistrale
+    draft: true
+    description: >-
+      Valutare e adattare modelli leggeri di segmentazione e classificazione dei nuclei
+      (NuLite, HoVer-UNet) su dataset pubblici non ancora considerati, studiando
+      l'effetto della normalizzazione del colore e della distillazione.
+    skills: [Python, PyTorch, deep learning]
+  - title: Grafi cellulari per la classificazione di sottotipi tumorali
+    level: Magistrale
+    draft: true
+    description: >-
+      Costruire grafi di cellule a partire da immagini istologiche e confrontare
+      architetture di graph neural network per la classificazione di sottotipi di
+      carcinoma mammario.
+    skills: [Python, PyTorch Geometric, grafi]
+  - title: Modelli vision-language per domande cliniche su immagini istologiche
+    level: Magistrale / Tirocinio
+    draft: true
+    description: >-
+      Studiare come rendere affidabili e calibrate le risposte dei modelli vision-language
+      in istopatologia, partendo dal framework PathJev.
+    skills: [Python, transformers, valutazione di modelli]
+  - title: Basi di dati a grafo per l'analisi di immagini mediche
+    level: Triennale
+    draft: true
+    description: >-
+      Progettare uno schema a grafo per memorizzare e interrogare i risultati
+      dell'analisi di immagini istologiche (cellule, regioni, relazioni spaziali).
+    skills: [SQL, database a grafo, Python]

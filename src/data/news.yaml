@@ -1,0 +1,48 @@
+# ------------------------------------------------------------------
+# News: one item per entry, newest first is NOT required (the site sorts).
+#   date: YYYY-MM-DD, YYYY-MM or YYYY
+#   text: short sentence. Markdown-style links are supported: [label](https://...)
+#   tag (optional): paper | talk | event | software | career | teaching
+# The home page shows the 5 most recent items; /news shows all of them.
+# ------------------------------------------------------------------
+
+- date: 2026-11-01
+  tag: paper
+  text: New preprint on arXiv, [EarthJev](https://arxiv.org/abs/2611.02096), calibrated non-generative answers to natural-language questions about Sentinel-2 land cover.
+
+- date: 2026-10-23
+  tag: paper
+  text: New preprint on arXiv, [PathJev](https://arxiv.org/abs/2610.32478), decision-native vision-language modelling for histopathology. Code on [GitHub](https://github.com/CosmoIknosLab/PathJev).
+
+- date: 2026
+  tag: paper
+  text: ECHO, a unified framework for efficient cell-graph construction for breast histology classification, accepted in *Biomedical Signal Processing and Control*.
+
+- date: 2026
+  tag: paper
+  text: Hierarchical graph networks for breast cancer subtype classification published in *Data Mining and Knowledge Discovery*.
+
+- date: 2026-02
+  tag: event
+  text: Proceedings of AIBio 2025 published by Springer as [CCIS vol. 2696](https://doi.org/10.1007/978-3-032-17216-7), co-edited with C. Russo and M. Bernardini.
+
+- date: 2025-10-25
+  tag: event
+  text: The 1st Workshop on Artificial Intelligence for Biomedical Data ([AIBio](https://wsaibio.github.io/ecai2025)), which I chaired, took place at ECAI 2025 in Bologna.
+
+- date: 2024-08
+  tag: software
+  text: '[NuLite](https://github.com/CosmoIknosLab/NuLite) released: a lightweight and fast model for nuclei instance segmentation and classification, with pretrained weights.'
+
+- date: 2024-05
+  tag: paper
+  text: HoVer-UNet, developed with the Computational Pathology Group at Radboud UMC, published at IEEE ISBI 2024. [Code](https://github.com/DIAGNijmegen/HoVer-UNet).
+
+- date: 2023-12-13
+  tag: career
+  text: PhD thesis completed, *Distilled Nuclei Segmentation for Graph-Based Whole Slide Images Analysis and Retrieval* ([fedOA](https://www.fedoa.unina.it/15632/)).
+
+# Example of an item to add when you have the date:
+# - date: 2026-MM-DD
+#   tag: career
+#   text: I joined DIETI, University of Naples Federico II, as Assistant Professor (RTD-A).

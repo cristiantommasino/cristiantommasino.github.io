@@ -1,0 +1,78 @@
+# ------------------------------------------------------------------
+# Research lines shown on /research (and summarised on the home page).
+#   image: path inside /public (e.g. images/research/nuclei.png).
+#          If empty, a built-in illustration is used (figure: nuclei | graph | vlm | kg).
+#   image_alt: description of the image for screen readers (always fill it in).
+#   papers: BibTeX keys from publications.bib, listed under the line.
+#   code: optional list of {label, url}.
+# ------------------------------------------------------------------
+
+- id: cells
+  title: Reading tissue cell by cell
+  short: Fast, lightweight models that find and classify every nucleus in a histology slide.
+  description: >-
+    A single whole-slide image of a biopsy can contain over a million cells. Pathologists
+    read them under the microscope; I build deep-learning models that locate and classify
+    each nucleus automatically, fast enough to run on entire slides without a GPU cluster.
+    This includes knowledge distillation to shrink large models (HoVer-UNet), lightweight
+    architectures (NuLite), tissue detection and stain normalization, and predicting
+    molecular biomarkers directly from routine H&E-stained slides.
+  keywords: [nuclei instance segmentation, knowledge distillation, whole-slide images, stain normalization, biomarkers from H&E]
+  figure: nuclei
+  image: ""
+  image_alt: Illustration of a histology tile in which each cell nucleus is outlined and coloured by predicted cell type.
+  papers: [tommasino2026nulite, tommasino2024hoverunet, tommasino2025caf1, rinaldi2022stain]
+  code:
+    - label: NuLite
+      url: https://github.com/CosmoIknosLab/NuLite
+    - label: HoVer-UNet
+      url: https://github.com/DIAGNijmegen/HoVer-UNet
+
+- id: graphs
+  title: Tissue as a graph
+  short: Turning cells and their neighbours into graphs to recognise cancer subtypes.
+  description: >-
+    How cells are arranged matters as much as what they look like. I represent a tissue
+    region as a cell graph, where every nucleus is a node and nearby nuclei are connected,
+    and use graph and hypergraph neural networks to classify breast cancer subtypes. A key
+    focus is making graph construction efficient and reusable, so the same pipeline can go
+    from raw slide to prediction quickly.
+  keywords: [cell graphs, graph neural networks, hypergraphs, breast cancer subtyping]
+  figure: graph
+  image: ""
+  image_alt: Illustration of cell nuclei connected by edges to their neighbours, forming a cell graph over the tissue.
+  papers: [tommasino2027echo, rinaldi2026hierarchical, tommasino2023phd]
+
+- id: language
+  title: Language models and agents for medicine
+  short: Vision-language models, retrieval-augmented generation and AI agents for clinical questions.
+  description: >-
+    Large language and vision-language models can answer questions in natural language, but
+    in medicine their answers must be grounded and calibrated. I work on vision-language
+    models for histopathology that output decisions rather than free text, on
+    retrieval-augmented generation that grounds answers in trusted sources, and on
+    chatbots and generative tools that support researchers and clinicians, from RNA-seq
+    analysis to surgical planning.
+  keywords: [vision-language models, retrieval-augmented generation, AI agents, generative AI]
+  figure: vlm
+  image: ""
+  image_alt: Diagram of an image and a question entering a vision-language model that returns a calibrated decision.
+  papers: [tommasino2026pathjev, defilippis2026redac, benfenati2024nutrigenetics, abbate2025inpainting]
+  code:
+    - label: PathJev
+      url: https://github.com/CosmoIknosLab/PathJev
+
+- id: knowledge
+  title: Knowledge graphs and multimedia retrieval
+  short: Organising images, text and audio into knowledge graphs so they can be searched and reasoned over.
+  description: >-
+    Finding the right image or document in a large collection is easier when content is
+    connected to meaning. I build multimedia knowledge graphs and ontologies that link
+    visual, textual and audio content, and use them for content-based retrieval, document
+    classification and focused web crawling, with applications from histopathology archives
+    (PACS) to cultural heritage, sports analytics and cybersecurity.
+  keywords: [knowledge graphs, ontologies, content-based image retrieval, focused crawling]
+  figure: kg
+  image: ""
+  image_alt: Illustration of a small knowledge graph linking an image, a document and concepts.
+  papers: [tommasino2023cbir, benfenati2026generative, rinaldi2021classification, rinaldi2020retrieval]

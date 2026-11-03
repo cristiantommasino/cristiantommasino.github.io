@@ -1,0 +1,77 @@
+# ------------------------------------------------------------------
+# Profile: name, role, bios and links shown on the home page,
+# in the footer and in the search-engine / social-media previews.
+# Leave a link empty ("") to hide it.
+# ------------------------------------------------------------------
+
+name: Cristian Tommasino
+# Used to put your name in bold in author lists (matches "Tommasino" with first initial "C").
+author_match:
+  last: Tommasino
+  first_initial: C
+
+role: Assistant Professor (RTD-A)
+department: Department of Electrical Engineering and Information Technology (DIETI)
+department_short: DIETI
+university: University of Naples Federico II
+lab: IKNOS Lab
+lab_url: https://iknos.dieti.unina.it/
+address:
+  - Via Claudio 21
+  - 80125 Naples, Italy
+
+# One line shown under your name on the home page.
+tagline: Computational pathology · Graph learning · Vision-language models
+
+# Path of your photo inside /public. If the file is missing, a monogram is shown.
+photo: images/profile.jpg
+photo_alt: Portrait of Cristian Tommasino
+
+# Short description used by search engines and social previews (max ~160 characters).
+seo_description: Cristian Tommasino is an Assistant Professor at the University of Naples Federico II working on computational pathology, graph learning and vision-language models.
+
+bio_short: >-
+  Cristian Tommasino is an Assistant Professor (RTD-A) at the Department of Electrical Engineering and
+  Information Technology (DIETI), University of Naples Federico II, and a member of the
+  IKNOS Lab. He develops efficient deep-learning methods for computational pathology, from
+  fast nuclei segmentation to cell-graph models for cancer subtyping, and connect them with
+  knowledge graphs and vision-language models for retrieval and decision support.
+
+# Paragraphs of the long bio (one item = one paragraph). Plain text; *text* becomes italic.
+bio_long:
+  - >-
+    Cristian Tommasino is an Assistant Professor (RTD-A, sector IINF-05/A Information Processing Systems) at
+    DIETI, University of Naples Federico II, where he works in the IKNOS Lab led by
+    Prof. Antonio Maria Rinaldi. He received his BSc and MSc in Computer Engineering from the
+    same university, with a master's thesis on web document retrieval using visual and
+    semantic techniques, and then a PhD in Information and Communication Technology for
+    Health (36th cycle) with the thesis *Distilled Nuclei Segmentation for Graph-Based Whole
+    Slide Images Analysis and Retrieval*.
+  - >-
+    His research focuses on computational pathology: analysing whole-slide histology images at
+    the level of individual cells, efficiently enough to be practical. Together with the
+    Computational Pathology Group at Radboud University Medical Center (Nijmegen) he developed
+    HoVer-UNet, which distils HoVerNet into a single U-Net and is about three times faster at
+    inference; he later developed NuLite, a lightweight model for nuclei instance segmentation
+    and classification. Both are open source. On top of these segmentations he builds cell
+    graphs to classify breast cancer subtypes with graph neural networks, and, with
+    pathologists at the University of Naples, he studies how to infer biomarkers directly from
+    routine H&E slides.
+  - >-
+    More recently he has been working on vision-language models and on retrieval-augmented,
+    agent-based systems for medicine, alongside a long-running line of work on multimedia
+    knowledge graphs and information retrieval. He was Workshop Chair of the 1st Workshop on
+    Artificial Intelligence for Biomedical Data (AIBio) at ECAI 2025, reviews for journals
+    including *Medical Image Analysis*, and teaches Databases and Multimedia Systems in the
+    Computer Engineering programmes at Federico II.
+
+# Quick links (home page and footer). Leave "" to hide.
+links:
+  email: cristian.tommasino@unina.it
+  scholar: ""        # e.g. https://scholar.google.com/citations?user=XXXXXXX
+  orcid: https://orcid.org/0000-0001-9763-8745
+  github: https://github.com/cristian921
+  linkedin: ""       # e.g. https://www.linkedin.com/in/your-handle
+  dblp: https://dblp.org/pid/207/6829.html
+  university_page: https://www.docenti.unina.it/cristian.tommasino
+  cv_pdf: cv/Cristian_Tommasino_CV.pdf   # file inside /public

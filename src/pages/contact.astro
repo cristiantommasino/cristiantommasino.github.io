@@ -1,0 +1,47 @@
+---
+import Base from '../layouts/Base.astro';
+import QuickLinks from '../components/QuickLinks.astro';
+import { profile } from '../lib/data';
+---
+<Base title="Contact" description={`How to contact ${profile.name}, ${profile.department}, ${profile.university}.`}>
+  <header class="page-head">
+    <p class="eyebrow">Contact</p>
+    <h1>Get in touch</h1>
+    <p>For collaborations, student projects or questions about my work, email is the best way to reach me.</p>
+  </header>
+
+  <p class="big-email"><a href={`mailto:${profile.links.email}`}>{profile.links.email}</a></p>
+
+  <dl class="contact-grid section" style="margin-top:2rem">
+    <div class="card">
+      <dt>Affiliation</dt>
+      <dd>
+        {profile.role}<br />
+        {profile.department}<br />
+        {profile.university}
+      </dd>
+    </div>
+    <div class="card">
+      <dt>Address</dt>
+      <dd>
+        {profile.department_short}, {profile.university}<br />
+        {profile.address.map((a) => <>{a}<br /></>)}
+      </dd>
+    </div>
+    <div class="card">
+      <dt>Research group</dt>
+      <dd>
+        <a href={profile.lab_url} rel="noopener">{profile.lab}</a><br />
+        <span class="muted">Intelligent Knowledge Systems Research Unit, DIETI</span>
+      </dd>
+    </div>
+  </dl>
+
+  <section class="section" aria-labelledby="h-elsewhere">
+    <div class="section-head"><h2 id="h-elsewhere">Elsewhere</h2></div>
+    <QuickLinks />
+    {profile.links.university_page && (
+      <p style="margin-top:1rem"><a href={profile.links.university_page} rel="noopener">University teacher page (docenti.unina.it)</a></p>
+    )}
+  </section>
+</Base>

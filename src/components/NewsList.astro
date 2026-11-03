@@ -1,0 +1,16 @@
+---
+import { formatDate, inlineMd, type NewsItem } from '../lib/data';
+
+interface Props {
+  items: NewsItem[];
+}
+const { items } = Astro.props;
+---
+<ul class="news-list">
+  {items.map((n) => (
+    <li>
+      <time datetime={n.date}>{formatDate(n.date)}</time>
+      <span set:html={inlineMd(n.text)} />
+    </li>
+  ))}
+</ul>

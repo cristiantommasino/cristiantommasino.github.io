@@ -1,0 +1,15 @@
+<script>
+  // "Copy" buttons inside BibTeX boxes.
+  document.addEventListener('click', async (e) => {
+    const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-copy]');
+    if (!btn) return;
+    const code = btn.parentElement?.querySelector('pre')?.textContent || '';
+    try {
+      await navigator.clipboard.writeText(code);
+      btn.textContent = 'Copied';
+    } catch {
+      btn.textContent = 'Select & copy';
+    }
+    setTimeout(() => (btn.textContent = 'Copy'), 1600);
+  });
+</script>

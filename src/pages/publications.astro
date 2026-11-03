@@ -1,0 +1,105 @@
+---
+import Base from '../layouts/Base.astro';
+import PubItem from '../components/PubItem.astro';
+import CopyBibtex from '../components/CopyBibtex.astro';
+import { publications, PUB_TYPES, profile } from '../lib/data';
+
+const years = [...new Set(publications.map((p) => p.year))].sort((a, b) => b - a);
+const typeCounts = Object.keys(PUB_TYPES)
+  .map((t) => ({ type: t, label: PUB_TYPES[t], n: publications.filter((p) => p.type === t).length }))
+  .filter((t) => t.n > 0);
+---
+<Base title="Publications" description={`Publications of ${profile.name}: journal articles, conference papers, preprints and more, with PDF, code, BibTeX and DOI links.`}>
+  <header class="page-head">
+    <p class="eyebrow">Publications</p>
+    <h1>Publications</h1>
+    <p>
+      {publications.length} items, newest first. My name is in bold. Filter by type or year, or search by title, author or venue.
+      {profile.links.scholar && <> See also <a href={profile.links.scholar} rel="noopener">Google Scholar</a>.</>}
+    </p>
+  </header>
+
+  <div class="filters" id="pub-filters" hidden>
+    <div class="filter-row" role="group" aria-label="Filter by type">
+      <span class="label">Type</span>
+      <button class="chip" type="button" data-type="all" aria-pressed="true">All<span class="n">{publications.length}</span></button>
+      {typeCounts.map((t) => (
+        <button class="chip" type="button" data-type={t.type} aria-pressed="false">{t.label}<span class="n">{t.n}</span></button>
+      ))}
+    </div>
+    <div class="filter-row">
+      <label class="label" for="pub-year">Year</label>
+      <select id="pub-year">
+        <option value="all">All years</option>
+        {years.map((y) => <option value={y}>{y}</option>)}
+      </select>
+      <label class="sr-only" for="pub-search">Search publications</label>
+      <input id="pub-search" type="search" placeholder="Search title, author, venue…" autocomplete="off" />
+    </div>
+  </div>
+  <p class="result-count" id="pub-count" aria-live="polite"></p>
+
+  {years.map((y) => (
+    <section class="year-group" data-year-group={y} aria-labelledby={`y${y}`}>
+      <h2 id={`y${y}`}>{y}</h2>
+      <ul class="pub-list">
+        {publications.filter((p) => p.year === y).map((p) => <PubItem pub={p} />)}
+      </ul>
+    </section>
+  ))}
+  <p id="pub-empty" class="muted" hidden>No publications match these filters.</p>
+  <CopyBibtex />
+</Base>
+
+<script>
+  const filters = document.getElementById('pub-filters')!;
+  filters.hidden = false; // filters need JavaScript; without it the full list is shown.
+  const chips = [...filters.querySelectorAll<HTMLButtonElement>('.chip')];
+  const yearSel = document.getElementById('pub-year') as HTMLSelectElement;
+  const search = document.getElementById('pub-search') as HTMLInputElement;
+  const items = [...document.querySelectorAll<HTMLElement>('.pub')];
+  const groups = [...document.querySelectorAll<HTMLElement>('[data-year-group]')];
+  const count = document.getElementById('pub-count')!;
+  const empty = document.getElementById('pub-empty')!;
+  let type = 'all';
+
+  // Restore filters from the URL (?type=journal&year=2025&q=graph) so filtered views can be shared.
+  const params = new URLSearchParams(location.search);
+  if (params.get('type')) type = params.get('type')!;
+  if (params.get('year')) yearSel.value = params.get('year')!;
+  if (params.get('q')) search.value = params.get('q')!;
+
+  function apply() {
+    const year = yearSel.value;
+    const q = search.value.trim().toLowerCase();
+    let shown = 0;
+    for (const el of items) {
+      const ok =
+        (type === 'all' || el.dataset.type === type) &&
+        (year === 'all' || el.dataset.year === year) &&
+        (!q || (el.dataset.search || '').includes(q));
+      el.hidden = !ok;
+      if (ok) shown++;
+    }
+    for (const g of groups) g.hidden = !g.querySelector('.pub:not([hidden])');
+    chips.forEach((c) => c.setAttribute('aria-pressed', String(c.dataset.type === type)));
+    count.textContent = `Showing ${shown} of ${items.length}`;
+    empty.hidden = shown > 0;
+
+    const p = new URLSearchParams();
+    if (type !== 'all') p.set('type', type);
+    if (year !== 'all') p.set('year', year);
+    if (q) p.set('q', q);
+    history.replaceState(null, '', p.toString() ? `?${p}` : location.pathname);
+  }
+
+  chips.forEach((c) =>
+    c.addEventListener('click', () => {
+      type = c.dataset.type || 'all';
+      apply();
+    }),
+  );
+  yearSel.addEventListener('change', apply);
+  search.addEventListener('input', apply);
+  apply();
+</script>
