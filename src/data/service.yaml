@@ -7,6 +7,11 @@
 # Remove a group or leave items: [] to hide it.
 # ------------------------------------------------------------------
 
+- group: Conference organisation
+  items:
+    - what: Local Sponsors Chair, European Conference on Machine Learning and Principles and Practice of Knowledge Discovery in Databases ([ECML PKDD 2026](https://ecmlpkdd.org/2026/organisation/)), Naples, Italy
+      when: "2026"
+
 - group: Workshop organisation
   items:
     - what: Organiser and primary contact (CVPath track), [Vision for Biomedical Discovery – CVPath + Vision4Neuro](https://cvpath-vision4neuro.github.io/wacv2027/), full-day workshop at WACV 2027, Lake Buena Vista, FL, USA
@@ -25,9 +30,17 @@
 
 - group: Programme committees
   items:
-    - what: Programme committee member, International Conference on Artificial Intelligence and Knowledge Engineering (AIKE)
-      when: ""
-      detail: Years to be added
+    - what: International Conference on Model and Data Engineering ([MEDI 2024](https://medi2024.dieti.unina.it/)), Naples, Italy
+      when: "2024"
+    - what: International Conference on Management of Digital EcoSystems ([MEDES 2024](https://conferences.sigappfr.org/medes2024/program-committee/))
+      when: "2024"
+    - what: IEEE International Conference on Artificial Intelligence and Knowledge Engineering ([AIKE 2023](https://semanticcomputing.wixsite.com/aike-2023/pc))
+      when: "2023"
+    - what: IEEE International Conference on Artificial Intelligence and Knowledge Engineering ([AIKE 2022](https://semanticcomputing.wixsite.com/aike-2022/pc))
+      when: "2022"
+    # Add other programme committees here, newest first:
+    # - what: Conference name (ACRONYM YEAR)
+    #   when: "2025"
 
 - group: Journal reviewing
   items:

@@ -14,6 +14,10 @@
   tag: paper
   text: New preprint on arXiv, [PathJev](https://arxiv.org/abs/2610.32478), decision-native vision-language modelling for histopathology. Code on [GitHub](https://github.com/CosmoIknosLab/PathJev).
 
+- date: 2026-09-07
+  tag: event
+  text: '[ECML PKDD 2026](https://ecmlpkdd.org/2026/) opened in Naples: I served on the organising committee as Local Sponsors Chair.'
+
 - date: 2026-09-11
   tag: event
   text: The 1st Workshop on Representation Learning from Heterogeneous and Multi-source Biomedical Data ([REHMED](https://rehmed-workshop.github.io/ecmlpkdd2026/)), which I co-organised, took place at ECML PKDD 2026 in Naples.
