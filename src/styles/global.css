@@ -428,6 +428,7 @@ main {
   aspect-ratio: 4 / 5;
   border-radius: 10px;
   object-fit: cover;
+  object-position: 50% 30%;
   background: var(--surface-2);
   border: 1px solid var(--rule);
 }
