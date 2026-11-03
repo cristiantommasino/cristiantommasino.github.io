@@ -40,18 +40,20 @@ bio_short: >-
 # Paragraphs of the long bio (one item = one paragraph). Plain text; *text* becomes italic.
 bio_long:
   - >-
-    Cristian Tommasino is an Assistant Professor (RTD-A, sector IINF-05/A Information Processing Systems) at
-    DIETI, University of Naples Federico II, where he works in the IKNOS Lab led by
-    Prof. Antonio Maria Rinaldi. He received his BSc and MSc in Computer Engineering from the
-    same university, with a master's thesis on web document retrieval using visual and
-    semantic techniques, and then a PhD in Information and Communication Technology for
-    Health (36th cycle) with the thesis *Distilled Nuclei Segmentation for Graph-Based Whole
-    Slide Images Analysis and Retrieval*.
+    Cristian Tommasino is an Assistant Professor (RTD-A, sector IINF-05/A Information
+    Processing Systems) at DIETI, University of Naples Federico II, since July 2024, where he
+    works in the IKNOS Lab led by Prof. Antonio Maria Rinaldi. He received his BSc and his MSc
+    (110/110 cum laude) in Computer Engineering from the same university, with a master's
+    thesis on multimedia web document retrieval based on text and visual descriptors. He then
+    carried out his PhD in Information and Communication Technology for Health at Federico II,
+    with the thesis *Distilled Nuclei Segmentation for Graph-Based Whole Slide Images Analysis
+    and Retrieval*, and was a postdoctoral research fellow at the CIRMIS centre of the same
+    university.
   - >-
     His research focuses on computational pathology: analysing whole-slide histology images at
-    the level of individual cells, efficiently enough to be practical. Together with the
-    Computational Pathology Group at Radboud University Medical Center (Nijmegen) he developed
-    HoVer-UNet, which distils HoVerNet into a single U-Net and is about three times faster at
+    the level of individual cells, efficiently enough to be practical. During a visiting period
+    at the Computational Pathology Group of Radboud University Medical Center (Nijmegen,
+    2022–2023) he developed HoVer-UNet, which distils HoVerNet into a single U-Net and is about three times faster at
     inference; he later developed NuLite, a lightweight model for nuclei instance segmentation
     and classification. Both are open source. On top of these segmentations he builds cell
     graphs to classify breast cancer subtypes with graph neural networks, and, with
@@ -60,10 +62,52 @@ bio_long:
   - >-
     More recently he has been working on vision-language models and on retrieval-augmented,
     agent-based systems for medicine, alongside a long-running line of work on multimedia
-    knowledge graphs and information retrieval. He was Workshop Chair of the 1st Workshop on
-    Artificial Intelligence for Biomedical Data (AIBio) at ECAI 2025, reviews for journals
-    including *Medical Image Analysis*, and teaches Databases and Multimedia Systems in the
-    Computer Engineering programmes at Federico II.
+    knowledge graphs and information retrieval. He organises workshops on AI for biomedical
+    data: he was Workshop Chair of AIBio at ECAI 2025, co-organised REHMED at ECML PKDD 2026,
+    and is the primary contact of CVPath, the computational pathology workshop at WACV 2027.
+    He reviews for journals including *Medical Image Analysis*, and teaches Multimedia Systems
+    and machine learning courses at Federico II.
+
+# Career and education, shown at the bottom of the home page (newest first).
+experience:
+  - when: 2024 – present
+    what: Assistant Professor (RTD-A)
+    where: DIETI, University of Naples Federico II
+    detail: Funded by the PNRR extended partnership RESTART
+  - when: 2023 – 2024
+    what: Postdoctoral research fellow
+    where: CIRMIS – Interdepartmental Research Centre in Healthcare Management and Innovation, University of Naples Federico II
+    detail: Management, integration and analysis of multimedia healthcare data with big data and AI techniques
+  - when: 2022 – 2023
+    what: Visiting researcher
+    where: Computational Pathology Group, Radboud University Medical Center, Nijmegen, the Netherlands
+    detail: Knowledge distillation for nuclei instance segmentation and classification (Oct 2022 – Mar 2023)
+  - when: "2020"
+    what: Research fellow
+    where: CINI – National Interuniversity Consortium for Informatics
+    detail: Development, validation and testing of software for ATO over ETCS railway systems
+  - when: 2019 – 2020
+    what: Research fellow, project PON OPL-APPS IIoT
+    where: DIETI, University of Naples Federico II
+    detail: Machine-learning-based industrial analytics for digital manufacturing
+  - when: 2018 – 2019
+    what: Python/Django developer and functional analyst
+    where: Fairvalyou S.r.l.
+    detail: Financial advisory platform with recommender systems and goal-based investment
+
+education:
+  - when: 2019 – 2023
+    what: PhD in Information and Communication Technology for Health
+    where: University of Naples Federico II
+    detail: "Thesis: *Distilled Nuclei Segmentation for Graph-Based Whole Slide Images Analysis and Retrieval*"
+  - when: 2015 – 2019
+    what: MSc in Computer Engineering, 110/110 cum laude
+    where: University of Naples Federico II
+    detail: "Thesis: *Multimedia Web Document Retrieval Based on Text and Visual Descriptors*"
+  - when: 2011 – 2015
+    what: BSc in Computer Engineering
+    where: University of Naples Federico II
+    detail: "Thesis on commercial and open-source tools for log collection and analysis"
 
 # Quick links (home page and footer). Leave "" to hide.
 links:

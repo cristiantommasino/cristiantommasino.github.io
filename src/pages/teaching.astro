@@ -13,21 +13,26 @@ const theses = teaching.supervision.theses || [];
     <p>Courses I teach at the University of Naples Federico II, theses I have supervised, and open proposals for students.</p>
   </header>
 
-  <section class="section" aria-labelledby="h-courses" style="margin-top:2rem">
-    <div class="section-head"><h2 id="h-courses">Courses</h2></div>
-    <ul class="item-list">
-      {teaching.courses.map((c) => (
-        <li>
-          <span>
-            {c.url ? <a href={c.url} rel="noopener">{c.name}</a> : c.name}
-            {c.credits && <span class="muted"> · {c.credits}</span>}
-          </span>
-          <span class="when">{c.years}</span>
-          <span class="detail">{c.programme}</span>
-        </li>
-      ))}
-    </ul>
-  </section>
+  {[
+    { id: 'h-courses', title: 'Courses', items: teaching.courses },
+    { id: 'h-assist', title: 'Teaching assistance', items: teaching.assistance || [] },
+  ].filter((g) => g.items.length).map((g, i) => (
+    <section class="section" aria-labelledby={g.id} style={i === 0 ? 'margin-top:2rem' : undefined}>
+      <div class="section-head"><h2 id={g.id}>{g.title}</h2></div>
+      <ul class="item-list">
+        {g.items.map((c) => (
+          <li>
+            <span>
+              {c.url ? <a href={c.url} rel="noopener">{c.name}</a> : c.name}
+              {c.credits && <span class="muted"> · {c.credits}</span>}
+            </span>
+            <span class="when">{c.years}</span>
+            <span class="detail">{c.programme}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
 
   <section class="section" aria-labelledby="h-sup">
     <div class="section-head"><h2 id="h-sup">Supervision</h2></div>

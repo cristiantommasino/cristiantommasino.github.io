@@ -66,6 +66,43 @@
       url: https://zenodo.org/records/10101807
   papers: [tommasino2024hoverunet]
 
+- title: RESTART – PNRR extended partnership
+  kind: Funded project
+  status: active
+  period: 2024 – present
+  description: >-
+    Italian national research programme funded by the PNRR (NextGenerationEU), within which
+    my Assistant Professor (RTD-A) position at DIETI is funded.
+  links:
+    - label: Website
+      url: https://www.fondazione-restart.it/
+
+- title: CVPath @ WACV 2027 – Computer Vision for Computational and Digital Pathology
+  kind: Workshop
+  status: active
+  period: 2026 – 2027
+  description: >-
+    First edition of CVPath, held with Vision4Neuro as the full-day workshop "Vision for
+    Biomedical Discovery" at WACV 2027 (Lake Buena Vista, FL, USA, January 2027). Organised
+    with Radboudumc, Human Technopole, the University of Molise and UNINA; it hosts the OWL
+    challenge on interpretable AI for prostate cancer recurrence.
+  links:
+    - label: Website
+      url: https://cvpath-vision4neuro.github.io/wacv2027/
+    - label: OWL challenge
+      url: https://owl.grand-challenge.org/
+
+- title: REHMED @ ECML PKDD 2026
+  kind: Workshop
+  status: completed
+  period: 2026
+  description: >-
+    1st Workshop on REpresentation learning from Heterogeneous and Multi-source biomEDical
+    data, a half-day workshop at ECML PKDD 2026 in Naples (11 September 2026).
+  links:
+    - label: Website
+      url: https://rehmed-workshop.github.io/ecmlpkdd2026/
+
 - title: AIBio 2025 – Workshop on AI for Biomedical Data
   kind: Workshop
   status: completed
@@ -89,6 +126,26 @@
     and generative AI.
   links: []
   papers: [barone2025ciniaiis, benfenati2024medicine, bosco2023healthcare]
+
+- title: PON OPL-APPS IIoT – Open Platform and Applications for manufacturing
+  kind: Funded project
+  status: completed
+  period: 2019 – 2020
+  description: >-
+    Research fellowship (PON ARS01_00615) on machine-learning-based industrial analytics for
+    digital manufacturing, including deep learning for surface defect detection and health
+    monitoring in Industry 4.0.
+  links: []
+
+- title: CINI – ATO over ETCS
+  kind: Funded project
+  status: completed
+  period: "2020"
+  description: >-
+    Research fellowship at the CINI consortium on the development, validation and testing of
+    software for Automatic Train Operation (ATO) over ETCS, compliant with European railway
+    standards.
+  links: []
 
 # Example of a funded project:
 # - title: Project name (ACRONYM)

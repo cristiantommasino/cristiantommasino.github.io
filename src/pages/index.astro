@@ -84,5 +84,31 @@ const jsonld = {
       {selected.map((p) => <PubItem pub={p} />)}
     </ul>
   </section>
+
+  <section class="section" aria-labelledby="h-career">
+    <div class="section-head"><h2 id="h-career">Career and education</h2></div>
+    <div class="grid-2" style="gap:2.5rem">
+      {[
+        { title: 'Positions', items: profile.experience },
+        { title: 'Education', items: profile.education },
+      ].map((col) => (
+        <div>
+          <h3 class="eyebrow" style="font-family:var(--font-mono);font-weight:400">{col.title}</h3>
+          <ul class="item-list">
+            {col.items.map((it) => (
+              <li>
+                <span>
+                  <strong style="font-weight:500">{it.what}</strong><br />
+                  <span class="muted">{it.where}</span>
+                </span>
+                <span class="when">{it.when}</span>
+                {it.detail && <span class="detail" set:html={inlineMd(it.detail)} />}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
   <CopyBibtex />
 </Base>

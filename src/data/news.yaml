@@ -14,6 +14,14 @@
   tag: paper
   text: New preprint on arXiv, [PathJev](https://arxiv.org/abs/2610.32478), decision-native vision-language modelling for histopathology. Code on [GitHub](https://github.com/CosmoIknosLab/PathJev).
 
+- date: 2026-09-11
+  tag: event
+  text: The 1st Workshop on Representation Learning from Heterogeneous and Multi-source Biomedical Data ([REHMED](https://rehmed-workshop.github.io/ecmlpkdd2026/)), which I co-organised, took place at ECML PKDD 2026 in Naples.
+
+- date: 2026-08-22
+  tag: event
+  text: '[CVPath](https://cvpath-vision4neuro.github.io/wacv2027/), the 1st workshop on Computer Vision for Computational and Digital Pathology, is coming to WACV 2027 (January 2027) together with Vision4Neuro, hosting the [OWL challenge](https://owl.grand-challenge.org/) on interpretable AI for prostate cancer recurrence.'
+
 - date: 2026
   tag: paper
   text: ECHO, a unified framework for efficient cell-graph construction for breast histology classification, accepted in *Biomedical Signal Processing and Control*.
@@ -21,6 +29,22 @@
 - date: 2026
   tag: paper
   text: Hierarchical graph networks for breast cancer subtype classification published in *Data Mining and Knowledge Discovery*.
+
+- date: 2025-05-13
+  tag: talk
+  text: Discussant in the telepathology session of the Digital Pathology Summit in Rome.
+
+- date: 2024-07-18
+  tag: career
+  text: I joined DIETI, University of Naples Federico II, as Assistant Professor (RTD-A), within the PNRR partnership [RESTART](https://www.fondazione-restart.it/).
+
+- date: 2023-09-14
+  tag: talk
+  text: Invited talk on developing and deploying AI models for pathology at GIPATEC 2023 in Naples.
+
+- date: 2022-10
+  tag: career
+  text: Started a six-month visiting period at the Computational Pathology Group of Radboud University Medical Center, Nijmegen, working on knowledge distillation for nuclei segmentation.
 
 - date: 2026-02
   tag: event
@@ -36,13 +60,9 @@
 
 - date: 2024-05
   tag: paper
-  text: HoVer-UNet, developed with the Computational Pathology Group at Radboud UMC, published at IEEE ISBI 2024. [Code](https://github.com/DIAGNijmegen/HoVer-UNet).
+  text: HoVer-UNet, developed with the Computational Pathology Group at Radboud UMC, presented as a poster at IEEE ISBI 2024. [Code](https://github.com/DIAGNijmegen/HoVer-UNet).
 
 - date: 2023-12-13
   tag: career
   text: PhD thesis completed, *Distilled Nuclei Segmentation for Graph-Based Whole Slide Images Analysis and Retrieval* ([fedOA](https://www.fedoa.unina.it/15632/)).
 
-# Example of an item to add when you have the date:
-# - date: 2026-MM-DD
-#   tag: career
-#   text: I joined DIETI, University of Naples Federico II, as Assistant Professor (RTD-A).

@@ -9,6 +9,11 @@
 
 - group: Workshop organisation
   items:
+    - what: Organiser and primary contact (CVPath track), [Vision for Biomedical Discovery – CVPath + Vision4Neuro](https://cvpath-vision4neuro.github.io/wacv2027/), full-day workshop at WACV 2027, Lake Buena Vista, FL, USA
+      when: "2027"
+      detail: 1st edition of CVPath – Computer Vision for Computational and Digital Pathology, hosting the [OWL challenge](https://owl.grand-challenge.org/) on interpretable AI for prostate cancer recurrence
+    - what: Organiser, 1st Workshop on REpresentation learning from Heterogeneous and Multi-source biomEDical data ([REHMED 2026](https://rehmed-workshop.github.io/ecmlpkdd2026/)), held with ECML PKDD 2026, Naples, Italy
+      when: "2026"
     - what: Workshop Chair and Publication Chair, 1st Workshop on Artificial Intelligence for Biomedical Data ([AIBio 2025](https://wsaibio.github.io/ecai2025)), held with ECAI 2025, Bologna, Italy
       when: "2025"
 
@@ -36,8 +41,18 @@
       when: 2023 – 2024
       detail: 2 reviews
 
-- group: Talks
-  items: []
+- group: Talks and presentations
+  items:
+    - what: Discussant, session *Telepatologia*, Digital Pathology Summit, Rome, Italy
+      when: "2025"
+    - what: Poster, *HoVer-UNet*, IEEE International Symposium on Biomedical Imaging (ISBI 2024)
+      when: "2024"
+    - what: Poster, *Cell-Graph Representation in Computational Pathology – A Unified Approach to Nuclei Detection and Feature Extraction*, International Conference on Active and Healthy Living, Naples, Italy
+      when: "2023"
+    - what: Invited talk, *Development and Deployment of AI Models for Pathology*, GIPATEC 2023 – Navigating Complex Management of H&N Lesions at the Intersection of Traditional and Advanced Morphology, Naples, Italy
+      when: "2023"
+    - what: Paper presentation, *A Novel Approach to Populate Multimedia Knowledge Graph via Deep Learning and Semantic Analysis*, 14th International Conference on Management of Digital EcoSystems (MEDES 2022), Venice, Italy
+      when: "2022"
   # - what: Talk title, Event, City
   #   when: "2026"
 

@@ -2,17 +2,32 @@
 # Teaching & students, shown on /teaching.
 # ------------------------------------------------------------------
 
+# Courses you teach as instructor (newest first).
 courses:
-  - name: Databases (Basi di Dati)
-    credits: 9 ECTS
-    programme: Computer Engineering (DE3), University of Naples Federico II
-    years: ""          # e.g. "2025/26 – present"
-    url: https://www.docenti.unina.it/cristian.tommasino
   - name: Multimedia Systems (Sistemi Multimediali)
     credits: ""
-    programme: Computer Engineering (N46), University of Naples Federico II
-    years: ""
+    programme: BSc in Computer Engineering, DIETI, University of Naples Federico II
+    years: 2025/26
     url: https://www.docenti.unina.it/cristian.tommasino
+  - name: Machine Learning and Big Data
+    credits: 9 ECTS
+    programme: MSc in Autonomous Vehicle Engineering (MOVE), Department of Industrial Engineering, University of Naples Federico II
+    years: 2024/25
+  - name: Machine Learning for Engineering
+    credits: 6 ECTS
+    programme: MSc in Mechanical Engineering for Design and Production, Department of Industrial Engineering, University of Naples Federico II (adjunct lecturer)
+    years: 2021 – 2023
+
+# Teaching assistance.
+assistance:
+  - name: Databases (Basi di Dati)
+    credits: 9 ECTS
+    programme: DIETI, University of Naples Federico II – course of Prof. A. M. Rinaldi
+    years: 2021 – 2023
+  - name: Introduction to Computer Science (Fondamenti di Informatica)
+    credits: 9 ECTS
+    programme: DIETI, University of Naples Federico II – course of Prof. A. M. Rinaldi
+    years: 2020 – 2021
 
 supervision:
   summary: >-
