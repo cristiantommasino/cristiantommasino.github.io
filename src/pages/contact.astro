@@ -33,6 +33,13 @@ import { profile } from '../lib/data';
       <dd>
         <a href={profile.lab_url} rel="noopener">{profile.lab}</a><br />
         <span class="muted">Intelligent Knowledge Systems Research Unit, DIETI</span>
+        {profile.collaborating_labs?.map((l) => (
+          <>
+            <br /><br />
+            <span class="muted">Collaborating with </span><a href={l.url} rel="noopener">{l.name}</a><br />
+            <span class="muted">{l.description}</span>
+          </>
+        ))}
       </dd>
     </div>
   </dl>

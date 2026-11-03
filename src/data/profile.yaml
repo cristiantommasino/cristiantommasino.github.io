@@ -16,6 +16,11 @@ department_short: DIETI
 university: University of Naples Federico II
 lab: IKNOS Lab
 lab_url: https://iknos.dieti.unina.it/
+# Other groups you collaborate with (shown on the Contact page).
+collaborating_labs:
+  - name: PICUS Lab
+    url: https://picuslab.dieti.unina.it/
+    description: Pattern analysis and Intelligent Computation for mUltimedia Systems, DIETI
 address:
   - Via Claudio 21
   - 80125 Naples, Italy
@@ -42,7 +47,8 @@ bio_long:
   - >-
     Cristian Tommasino is an Assistant Professor (RTD-A, sector IINF-05/A Information
     Processing Systems) at DIETI, University of Naples Federico II, since July 2024, where he
-    works in the IKNOS Lab led by Prof. Antonio Maria Rinaldi. He received his BSc and his MSc
+    works in the IKNOS Lab led by Prof. Antonio Maria Rinaldi and collaborates with the PICUS
+    Lab (Pattern analysis and Intelligent Computation for mUltimedia Systems). He received his BSc and his MSc
     (110/110 cum laude) in Computer Engineering from the same university, with a master's
     thesis on multimedia web document retrieval based on text and visual descriptors. He then
     carried out his PhD in Information and Communication Technology for Health at Federico II,
@@ -67,6 +73,21 @@ bio_long:
     and is the primary contact of CVPath, the computational pathology workshop at WACV 2027.
     He reviews for journals including *Medical Image Analysis*, and teaches Multimedia Systems
     and machine learning courses at Federico II.
+
+# Key numbers shown under the hero on the home page.
+# value: "auto" counts the papers in publications.bib (excluding thesis and edited volumes).
+stats:
+  - value: auto
+    label: publications
+  - value: "11"
+    label: h-index
+    note: Scopus, Oct 2026
+  - value: "308"
+    label: citations
+    note: Scopus, Oct 2026
+  - value: "3"
+    label: workshops organised
+    note: ECAI · ECML PKDD · WACV
 
 # Career and education, shown at the bottom of the home page (newest first).
 experience:

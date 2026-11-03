@@ -105,6 +105,7 @@ const year = new Date().getFullYear();
     </header>
 
     <main id="main">
+      <slot name="hero" />
       <div class="wrap">
         <slot />
       </div>
@@ -144,6 +145,38 @@ const year = new Date().getFullYear();
         root.setAttribute('data-theme', next);
         try { localStorage.setItem('theme', next); } catch {}
       });
+
+      // Fade sections in as they scroll into view, and count the key numbers up.
+      const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const countUp = (el: HTMLElement) => {
+        const end = Number(el.dataset.count);
+        const t0 = performance.now();
+        const step = (now: number) => {
+          const p = Math.min(1, (now - t0) / 1400);
+          el.textContent = String(Math.round(end * (1 - Math.pow(1 - p, 3))));
+          if (p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      };
+      if (!calm && 'IntersectionObserver' in window) {
+        const targets = document.querySelectorAll<HTMLElement>('main .section, main .research-line, main .stats');
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              if (!e.isIntersecting) continue;
+              const el = e.target as HTMLElement;
+              el.classList.add('is-in');
+              el.querySelectorAll<HTMLElement>('[data-count]').forEach(countUp);
+              io.unobserve(el);
+            }
+          },
+          { rootMargin: '0px 0px -8% 0px' },
+        );
+        targets.forEach((el) => {
+          el.classList.add('reveal');
+          io.observe(el);
+        });
+      }
 
       const menuBtn = document.querySelector<HTMLButtonElement>('.menu-btn');
       const nav = document.getElementById('site-nav');

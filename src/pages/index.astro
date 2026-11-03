@@ -4,11 +4,17 @@ import QuickLinks from '../components/QuickLinks.astro';
 import NewsList from '../components/NewsList.astro';
 import PubItem from '../components/PubItem.astro';
 import CopyBibtex from '../components/CopyBibtex.astro';
+import HeroCanvas from '../components/HeroCanvas.astro';
 import { profile, research, news, publications, url, inlineMd, photoExists } from '../lib/data';
 
 const hasPhoto = photoExists();
 const initials = profile.name.split(' ').map((p) => p[0]).join('');
 const selected = publications.filter((p) => p.selected).slice(0, 5);
+const nameParts = profile.name.split(' ');
+const last = nameParts.pop();
+const first = nameParts.join(' ');
+const paperCount = publications.filter((p) => p.type !== 'thesis' && p.type !== 'edited').length;
+const stats = (profile.stats || []).map((st) => ({ ...st, value: st.value === 'auto' ? String(paperCount) : String(st.value) }));
 
 const sameAs = [profile.links.orcid, profile.links.scholar, profile.links.github, profile.links.linkedin, profile.links.dblp, profile.lab_url].filter(Boolean);
 const jsonld = {
@@ -29,25 +35,44 @@ const jsonld = {
 };
 ---
 <Base jsonld={jsonld}>
-  <section class="hero" aria-labelledby="hero-name">
-    <div>
-      <p class="eyebrow">{profile.department_short} · {profile.university}</p>
-      <h1 id="hero-name">{profile.name}</h1>
-      <p class="role">{profile.role}, <a href={profile.lab_url} rel="noopener">{profile.lab}</a></p>
-      <p class="tagline">{profile.tagline}</p>
-      <p class="bio">{profile.bio_short}</p>
-      <QuickLinks />
-      <details class="long-bio">
-        <summary>Read the full bio</summary>
-        {profile.bio_long.map((p) => <p set:html={inlineMd(p)} />)}
-      </details>
+  <section class="hero-x" slot="hero" aria-labelledby="hero-name">
+    <HeroCanvas />
+    <div class="wrap hero-x-inner">
+      <div class="hero-x-text">
+        <p class="hero-x-eyebrow">{profile.department_short} · {profile.university}</p>
+        <h1 id="hero-name">
+          <span>{first}</span> <em>{last}</em>
+        </h1>
+        <p class="hero-x-role">{profile.role} · <a href={profile.lab_url} rel="noopener">{profile.lab}</a></p>
+        <p class="hero-x-tagline">{profile.tagline}</p>
+        <p class="hero-x-bio">{profile.bio_short}</p>
+        <QuickLinks />
+      </div>
+      <div class="hero-x-photo">
+        {hasPhoto ? (
+          <img src={url(profile.photo)} alt={profile.photo_alt} width="260" height="260" />
+        ) : (
+          <div class="portrait-fallback" role="img" aria-label={`${profile.name} (photo coming soon)`}>{initials}</div>
+        )}
+      </div>
     </div>
-    <div class="hero-figure">
-      {hasPhoto ? (
-        <img class="portrait" src={url(profile.photo)} alt={profile.photo_alt} width="230" height="288" />
-      ) : (
-        <div class="portrait portrait-fallback" role="img" aria-label={`${profile.name} (photo coming soon)`}>{initials}</div>
-      )}
+    <p class="hero-x-hint" aria-hidden="true">Move the lens — nuclei are segmented and linked into a cell graph</p>
+  </section>
+
+  <section class="stats" aria-label="Key numbers">
+    {stats.map((st) => (
+      <div class="stat">
+        <span class="stat-value" data-count={/^\d+$/.test(st.value) ? st.value : undefined}>{st.value}</span>
+        <span class="stat-label">{st.label}</span>
+        {st.note && <span class="stat-note">{st.note}</span>}
+      </div>
+    ))}
+  </section>
+
+  <section class="section" aria-labelledby="h-about">
+    <div class="section-head"><h2 id="h-about">About</h2></div>
+    <div class="prose about">
+      {profile.bio_long.map((p) => <p set:html={inlineMd(p)} />)}
     </div>
   </section>
 

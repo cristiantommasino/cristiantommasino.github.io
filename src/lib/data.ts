@@ -39,6 +39,8 @@ export interface Profile {
   seo_description: string;
   bio_short: string;
   bio_long: string[];
+  collaborating_labs?: { name: string; url: string; description: string }[];
+  stats?: { value: string; label: string; note?: string }[];
   experience: TimelineItem[];
   education: TimelineItem[];
   links: Record<string, string>;
