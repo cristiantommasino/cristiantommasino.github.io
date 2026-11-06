@@ -52,6 +52,26 @@ Metti `draft: false` per pubblicarle.
 - **CV**: sostituisci `public/cv/Cristian_Tommasino_CV.pdf` mantenendo lo stesso nome.
 - **Anteprima social** (`public/og.png`): se cambi nome o ruolo, rigenerala con `python scripts/make-og.py`.
 
+## Aggiornamenti automatici (ogni lunedì)
+
+Il workflow `.github/workflows/update-data.yml` gira ogni lunedì alle 5:00 UTC (oppure a mano da
+**Actions → Update data → Run workflow**) ed esegue `scripts/update-data.mjs`, che usa
+[OpenAlex](https://openalex.org) tramite il tuo ORCID:
+
+- **h-index e citazioni**: aggiorna `src/data/metrics.json`; se i numeri cambiano li salva direttamente
+  e il sito si ripubblica da solo. In home compaiono con la nota "OpenAlex, mese anno".
+  Per usare numeri tuoi (es. Scopus) scrivi il valore in `stats` di `profile.yaml` al posto di `auto:...`.
+- **Nuove pubblicazioni**: confronta i tuoi lavori su OpenAlex con `publications.bib` (per DOI, arXiv o titolo)
+  e apre una **pull request** con le voci mancanti, scaricate da doi.org. Controlla autori, venue e `pubtype`,
+  aggiungi se vuoi `abbr`, `code`, `pdf`, poi fai *Merge*: a quel punto vanno online.
+
+Perché il workflow possa aprire le pull request va abilitato una volta:
+**Settings → Actions → General → Workflow permissions →** "Read and write permissions" e
+"Allow GitHub Actions to create and approve pull requests" (nel repository, e se richiesto anche nelle
+impostazioni dell'organizzazione).
+
+In locale: `node scripts/update-data.mjs --dry-run` mostra cosa cambierebbe senza modificare i file.
+
 ## Pubblicare su GitHub Pages (la prima volta)
 
 Il sito è ospitato da un'organizzazione GitHub gratuita, `cristiantommasino`, così l'indirizzo è

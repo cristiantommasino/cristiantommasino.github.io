@@ -11,6 +11,7 @@ import serviceSrc from '../data/service.yaml?raw';
 import teachingSrc from '../data/teaching.yaml?raw';
 import newsSrc from '../data/news.yaml?raw';
 import bibSrc from '../data/publications.bib?raw';
+import metricsData from '../data/metrics.json';
 
 function readYaml<T>(src: string): T {
   return yaml.load(src) as T;
@@ -130,6 +131,9 @@ export interface Publication {
 
 export const profile = readYaml<Profile>(profileSrc);
 export const research = readYaml<ResearchLine[]>(researchSrc);
+// Citation metrics written by scripts/update-data.mjs.
+export const metrics: { source: string; updated: string; h_index: number | null; citations: number | null } = metricsData;
+
 export const projects = readYaml<Project[]>(projectsSrc);
 export const service = readYaml<ServiceGroup[]>(serviceSrc);
 export const teaching = readYaml<Teaching>(teachingSrc);

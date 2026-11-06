@@ -8,6 +8,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "update-data": "node scripts/update-data.mjs",
     "astro": "astro"
   },
   "engines": {

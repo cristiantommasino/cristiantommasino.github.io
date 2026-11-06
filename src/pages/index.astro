@@ -5,7 +5,7 @@ import NewsList from '../components/NewsList.astro';
 import PubItem from '../components/PubItem.astro';
 import CopyBibtex from '../components/CopyBibtex.astro';
 import HeroCanvas from '../components/HeroCanvas.astro';
-import { profile, research, news, publications, url, inlineMd, photoExists } from '../lib/data';
+import { profile, research, news, publications, metrics, url, inlineMd, photoExists, formatDate } from '../lib/data';
 
 const hasPhoto = photoExists();
 const initials = profile.name.split(' ').map((p) => p[0]).join('');
@@ -14,7 +14,19 @@ const nameParts = profile.name.split(' ');
 const last = nameParts.pop();
 const first = nameParts.join(' ');
 const paperCount = publications.filter((p) => p.type !== 'thesis' && p.type !== 'edited').length;
-const stats = (profile.stats || []).map((st) => ({ ...st, value: st.value === 'auto' ? String(paperCount) : String(st.value) }));
+const autoValues: Record<string, number | null> = {
+  auto: paperCount,
+  'auto:publications': paperCount,
+  'auto:h_index': metrics.h_index,
+  'auto:citations': metrics.citations,
+};
+const stats = (profile.stats || [])
+  .map((st) => ({
+    ...st,
+    value: String(st.value in autoValues ? (autoValues[st.value] ?? '') : st.value),
+    note: st.note === 'auto' ? `${metrics.source}, ${formatDate(metrics.updated.slice(0, 7))}` : st.note,
+  }))
+  .filter((st) => st.value !== '');
 
 const sameAs = [profile.links.orcid, profile.links.scholar, profile.links.github, profile.links.linkedin, profile.links.dblp, profile.lab_url].filter(Boolean);
 const jsonld = {

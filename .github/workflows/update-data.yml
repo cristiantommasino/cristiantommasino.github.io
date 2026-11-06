@@ -1,0 +1,59 @@
+# Every Monday: refresh citation metrics from OpenAlex and look for new publications.
+# - Changed metrics are committed straight to main (the site is then redeployed).
+# - New publications are proposed in a pull request, to be checked before merging.
+# Can also be started by hand from the Actions tab ("Run workflow").
+name: Update data
+
+on:
+  schedule:
+    - cron: '0 5 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node scripts/update-data.mjs
+
+      - name: Commit updated metrics
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/metrics.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Update citation metrics from OpenAlex"
+            git push
+          fi
+
+      - name: Open a pull request with new publications
+        uses: peter-evans/create-pull-request@v7
+        with:
+          add-paths: src/data/publications.bib
+          branch: auto/new-publications
+          delete-branch: true
+          commit-message: Add publications found on OpenAlex
+          title: New publications found on OpenAlex
+          body: |
+            The weekly update found publications listed on OpenAlex (via your ORCID) that are not in `publications.bib`.
+
+            Before merging, check in **Files changed**:
+            - authors and title are correct, and the paper is really yours;
+            - `pubtype` (journal / conference / workshop / chapter / preprint) and the venue name;
+            - optionally add `abbr` (venue badge), `code`, `pdf` or `selected = {true}`.
+
+            Merging publishes them on the website. Close the pull request to ignore them
+            (they will be proposed again next week unless you add them to the file).

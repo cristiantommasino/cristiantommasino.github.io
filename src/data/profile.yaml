@@ -77,16 +77,19 @@ bio_long:
     and machine learning courses at Federico II.
 
 # Key numbers shown under the hero on the home page.
-# value: "auto" counts the papers in publications.bib (excluding thesis and edited volumes).
+# value: a number, or
+#   auto:publications  -> counts the papers in publications.bib (no thesis / edited volumes)
+#   auto:h_index, auto:citations -> from src/data/metrics.json, updated weekly from OpenAlex
+# note: free text, or "auto" to show the source and month of the metrics.
 stats:
-  - value: auto
+  - value: auto:publications
     label: publications
-  - value: "11"
+  - value: auto:h_index
     label: h-index
-    note: Scopus, Oct 2026
-  - value: "308"
+    note: auto
+  - value: auto:citations
     label: citations
-    note: Scopus, Oct 2026
+    note: auto
   - value: "3"
     label: workshops organised
     note: ECAI · ECML PKDD · WACV
