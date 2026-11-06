@@ -160,11 +160,15 @@ if (!fresh.length) {
     blocks.push(await toBibtex(w));
   }
   const header =
-    `\n% ----------------------------------------------------------------------\n` +
     `% Auto-imported from OpenAlex on ${metrics.updated}: check authors, venue,\n` +
-    `% pubtype and add abbr / code / pdf before merging.\n` +
-    `% ----------------------------------------------------------------------\n\n`;
-  const out = bibSrc.replace(/\s*$/, '\n') + header + blocks.join('\n\n') + '\n';
-  if (DRY) console.log('\n' + header + blocks.join('\n\n'));
+    `% pubtype and add abbr / code / pdf before merging.\n\n`;
+  const block = header + blocks.join('\n\n') + '\n\n';
+  // Insert after the file's header comment (closed by the second "% =====" line) so that new
+  // papers are listed first within their year on the website; fall back to the top of the file.
+  const first = bibSrc.indexOf('% =====');
+  const second = first === -1 ? -1 : bibSrc.indexOf('% =====', first + 1);
+  const at = second === -1 ? 0 : bibSrc.indexOf('\n', second) + 1;
+  const out = bibSrc.slice(0, at) + '\n' + block + bibSrc.slice(at).replace(/^\n+/, '');
+  if (DRY) console.log('\n' + block);
   else fs.writeFileSync(BIB, out);
 }

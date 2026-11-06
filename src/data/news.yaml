@@ -6,6 +6,10 @@
 # The home page shows the 5 most recent items; /news shows all of them.
 # ------------------------------------------------------------------
 
+- date: 2026-11-05
+  tag: paper
+  text: 'Two new papers online: *PathogenKG*, cross-species drug repurposing via knowledge graph link prediction (ECML PKDD 2026, [doi](https://doi.org/10.1007/978-3-032-37679-4_34)), and embedding-space attacks on pathology foundation models for histopathology retrieval (ACM CIKM 2026, [doi](https://doi.org/10.1145/3799682.3839897)).'
+
 - date: 2026-11-01
   tag: paper
   text: New preprint on arXiv, [EarthJev](https://arxiv.org/abs/2611.02096), calibrated non-generative answers to natural-language questions about Sentinel-2 land cover.
