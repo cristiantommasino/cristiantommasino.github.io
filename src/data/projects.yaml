@@ -117,16 +117,6 @@
     - label: Proceedings
       url: https://doi.org/10.1007/978-3-032-17216-7
 
-- title: CINI-AIIS national laboratory – Naples node
-  kind: Research network
-  period: 2023 – 2025
-  description: >-
-    Participation in the activities of the Naples Federico II node of the CINI national
-    laboratory on Artificial Intelligence and Intelligent Systems, on AI for healthcare
-    and generative AI.
-  links: []
-  papers: [barone2025ciniaiis, benfenati2024medicine, bosco2023healthcare]
-
 - title: PON OPL-APPS IIoT – Open Platform and Applications for manufacturing
   kind: Funded project
   status: completed
