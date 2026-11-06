@@ -41,6 +41,8 @@ export interface Profile {
   bio_short: string;
   bio_long: string[];
   collaborating_labs?: { name: string; url: string; description: string }[];
+  languages?: string[];
+  research_interests?: string[];
   stats?: { value: string; label: string; note?: string }[];
   experience: TimelineItem[];
   education: TimelineItem[];
@@ -164,11 +166,20 @@ function isMe(first: string, last: string): boolean {
   );
 }
 
+// "Giovanni Maria" -> "G. M." so that all author lists look alike (imported entries use full names).
+function initials(first: string): string {
+  return first
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((part) => part.split('-').map((p) => (/^\p{L}\.$/u.test(p) ? p : `${p[0]}.`)).join('-'))
+    .join(' ');
+}
+
 function toPublication(e: ReturnType<typeof parseBibtex>[number]): Publication {
   const f = e.fields;
   const people = f.author || f.editor || '';
   const authors = splitAuthors(people).map((a) => ({
-    name: `${a.first} ${a.last}`.trim(),
+    name: `${initials(a.first)} ${a.last}`.trim(),
     me: isMe(a.first, a.last),
   }));
 

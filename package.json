@@ -9,6 +9,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "update-data": "node scripts/update-data.mjs",
+    "cv": "node scripts/make-cv-pdf.mjs --public",
     "astro": "astro"
   },
   "engines": {

@@ -49,7 +49,9 @@ Metti `draft: false` per pubblicarle.
 - **Foto**: salva un JPG verticale (circa 600×750 px) come `public/images/profile.jpg`. Finché manca, compaiono le iniziali.
 - **Figure di ricerca**: metti i file in `public/images/research/` e scrivi il percorso nel campo `image` di `research.yaml`
   (es. `images/research/nulite.png`), con una descrizione in `image_alt`. Se `image` è vuoto viene usata l'illustrazione schematica integrata.
-- **CV**: sostituisci `public/cv/Cristian_Tommasino_CV.pdf` mantenendo lo stesso nome.
+- **CV in PDF**: si genera da solo dagli stessi dati del sito (pagina `src/pages/cv.astro`) a ogni pubblicazione,
+  quindi è sempre aggiornato. Per rigenerarlo in locale: `npm run build` e poi `node scripts/make-cv-pdf.mjs --public`
+  (serve Chrome o Edge). Interessi di ricerca e lingue del CV sono in `profile.yaml`.
 - **Anteprima social** (`public/og.png`): se cambi nome o ruolo, rigenerala con `python scripts/make-og.py`.
 
 ## Aggiornamenti automatici (ogni lunedì)

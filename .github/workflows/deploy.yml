@@ -38,6 +38,11 @@ jobs:
           # and for custom domains configured in Settings → Pages.
           SITE_URL: ${{ steps.pages.outputs.origin }}
           BASE_PATH: ${{ steps.pages.outputs.base_path }}/
+      # Regenerate the PDF CV from the current data (falls back to the committed PDF on failure).
+      - run: node scripts/make-cv-pdf.mjs
+        continue-on-error: true
+        env:
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

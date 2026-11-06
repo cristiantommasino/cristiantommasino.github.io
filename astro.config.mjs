@@ -11,5 +11,6 @@ export default defineConfig({
   site,
   base,
   trailingSlash: 'ignore',
-  integrations: [sitemap()],
+  // The printable CV page is only the source of the PDF, so keep it out of the sitemap.
+  integrations: [sitemap({ filter: (page) => !page.includes('/cv/') })],
 });

@@ -1,0 +1,288 @@
+---
+// Printable curriculum vitae built from the same data as the website.
+// scripts/make-cv-pdf.mjs prints this page to public/cv/Cristian_Tommasino_CV.pdf
+// (the deploy workflow does it at every build, so the PDF is always up to date).
+import '@fontsource-variable/source-serif-4/opsz.css';
+import '@fontsource/ibm-plex-sans/latin-400.css';
+import '@fontsource/ibm-plex-sans/latin-400-italic.css';
+import '@fontsource/ibm-plex-sans/latin-600.css';
+import {
+  profile, research, publications, projects, service, teaching, metrics, PUB_TYPES, inlineMd, formatDate,
+} from '../lib/data';
+
+const site = (Astro.site?.toString() || '').replace(/\/$/, '');
+const today = new Date().toISOString().slice(0, 7);
+const l = profile.links;
+const contacts = [
+  l.email && { label: l.email, href: `mailto:${l.email}` },
+  site && { label: site.replace(/^https?:\/\//, ''), href: site },
+  l.orcid && { label: `ORCID ${l.orcid.split('/').pop()}`, href: l.orcid },
+  l.scholar && { label: 'Google Scholar', href: l.scholar },
+  l.github && { label: l.github.replace(/^https?:\/\//, ''), href: l.github },
+  l.linkedin && { label: 'LinkedIn', href: l.linkedin },
+].filter(Boolean) as { label: string; href: string }[];
+
+const ORDER = ['journal', 'review', 'conference', 'workshop', 'chapter', 'edited', 'preprint', 'thesis'];
+const GROUP_TITLES: Record<string, string> = {
+  journal: 'Journal articles',
+  review: 'Reviews and surveys',
+  conference: 'Conference papers',
+  workshop: 'Workshop papers and lab reports',
+  chapter: 'Book chapters',
+  edited: 'Edited volumes',
+  preprint: 'Preprints',
+  thesis: 'Thesis',
+};
+const pubGroups = ORDER.map((t) => ({
+  title: GROUP_TITLES[t] || PUB_TYPES[t],
+  items: publications.filter((p) => p.type === t),
+})).filter((g) => g.items.length);
+const paperCount = publications.filter((p) => p.type !== 'thesis' && p.type !== 'edited').length;
+
+const funded = projects.filter((p) => /funded/i.test(p.kind));
+const software = projects.filter((p) => /software/i.test(p.kind));
+const serviceGroups = service.filter((g) => g.items?.length);
+const doi = (p: (typeof publications)[number]) => p.links.find((x) => x.label === 'DOI');
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{profile.name} – Curriculum Vitae</title>
+    <meta name="description" content={`Curriculum vitae of ${profile.name}, ${profile.role}, ${profile.university}.`} />
+    <meta name="robots" content="noindex" />
+    <style is:global>
+      @page {
+        size: A4;
+        margin: 15mm 16mm 16mm;
+      }
+      :root {
+        --ink: #1b1a22;
+        --ink-2: #4c4957;
+        --ink-3: #6b6877;
+        --rule: #dcd8cf;
+        --hema: #3e3a8c;
+        --eosin: #a8325f;
+      }
+      * { box-sizing: border-box; }
+      html { background: #fff; }
+      body {
+        margin: 0 auto;
+        max-width: 190mm;
+        padding: 10mm 0;
+        font-family: 'IBM Plex Sans', 'Segoe UI', sans-serif;
+        font-size: 9.6pt;
+        line-height: 1.45;
+        color: var(--ink);
+        background: #fff;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      @media print { body { padding: 0; max-width: none; } }
+      a { color: var(--hema); text-decoration: none; }
+      h1, h2, h3 { font-family: 'Source Serif 4 Variable', Georgia, serif; font-weight: 600; margin: 0; }
+      header.cv-head {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 4mm;
+        border-bottom: 2px solid var(--hema);
+        padding-bottom: 4mm;
+        margin-bottom: 5mm;
+      }
+      h1 { font-size: 24pt; letter-spacing: -0.02em; line-height: 1.05; }
+      .role { font-size: 11pt; color: var(--ink-2); margin: 1.5mm 0 2mm; }
+      .contacts { font-size: 8.8pt; color: var(--ink-2); }
+      .contacts span + span::before { content: ' · '; color: var(--ink-3); }
+      .updated { font-size: 8pt; color: var(--ink-3); text-align: right; white-space: nowrap; }
+      section { margin-bottom: 4.5mm; }
+      h2 {
+        font-size: 12.5pt;
+        color: var(--hema);
+        border-bottom: 1px solid var(--rule);
+        padding-bottom: 1mm;
+        margin-bottom: 2.2mm;
+        break-after: avoid;
+      }
+      h3 {
+        font-size: 10.2pt;
+        margin: 3mm 0 1.2mm;
+        color: var(--ink);
+        break-after: avoid;
+      }
+      p { margin: 0 0 1.6mm; }
+      .rows { list-style: none; margin: 0; padding: 0; }
+      .rows li {
+        display: grid;
+        grid-template-columns: 27mm 1fr;
+        gap: 3mm;
+        padding: 0.9mm 0;
+        break-inside: avoid;
+      }
+      .rows .when { color: var(--eosin); font-size: 8.8pt; white-space: nowrap; padding-top: 0.2mm; }
+      .rows .what strong { font-weight: 600; }
+      .rows .sub { color: var(--ink-2); }
+      .rows .detail { color: var(--ink-3); font-size: 8.8pt; }
+      .pubs { margin: 0; padding-left: 7mm; }
+      .pubs li { margin-bottom: 1.3mm; break-inside: avoid; padding-left: 1mm; }
+      .pubs li::marker { color: var(--ink-3); font-size: 8.5pt; }
+      .pubs .t { font-weight: 600; }
+      .pubs .v { color: var(--ink-2); }
+      .pubs .d { color: var(--ink-3); font-size: 8.5pt; }
+      .me { font-weight: 600; text-decoration: underline; text-decoration-color: var(--eosin); text-underline-offset: 1.5px; }
+      .two { display: grid; grid-template-columns: 1fr 1fr; gap: 0 8mm; }
+      .muted { color: var(--ink-3); }
+      .tags { color: var(--ink-2); }
+      .interests { margin: 1.5mm 0 0; padding-left: 5mm; }
+      .interests li { margin-bottom: 0.6mm; }
+    </style>
+  </head>
+  <body>
+    <header class="cv-head">
+      <div>
+        <h1>{profile.name}</h1>
+        <p class="role">{profile.role} · {profile.department}, {profile.university}</p>
+        <p class="contacts">
+          {contacts.map((c) => <span><a href={c.href}>{c.label}</a></span>)}
+        </p>
+        <p class="contacts">{profile.department_short}, {profile.university}, {profile.address.join(', ')}</p>
+      </div>
+      <div class="updated">Curriculum vitae<br />Updated {formatDate(today)}</div>
+    </header>
+
+    <section>
+      <h2>Profile</h2>
+      <p>{profile.bio_short}</p>
+      {profile.research_interests?.length ? (
+        <ul class="interests">
+          {profile.research_interests.map((r) => {
+            const [head, ...rest] = r.split(':');
+            return <li><strong>{head}</strong>{rest.length > 0 && `:${rest.join(':')}`}</li>;
+          })}
+        </ul>
+      ) : (
+        <p class="tags"><strong>Research interests:</strong> {research.map((r) => r.title).join(' · ')}.</p>
+      )}
+    </section>
+
+    <section>
+      <h2>Positions</h2>
+      <ul class="rows">
+        {profile.experience.map((it) => (
+          <li>
+            <span class="when">{it.when}</span>
+            <span class="what"><strong>{it.what}</strong>, <span class="sub">{it.where}</span>{it.detail && <><br /><span class="detail" set:html={inlineMd(it.detail)} /></>}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section>
+      <h2>Education</h2>
+      <ul class="rows">
+        {profile.education.map((it) => (
+          <li>
+            <span class="when">{it.when}</span>
+            <span class="what"><strong>{it.what}</strong>, <span class="sub">{it.where}</span>{it.detail && <><br /><span class="detail" set:html={inlineMd(it.detail)} /></>}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section>
+      <h2>Research output</h2>
+      <p>
+        {paperCount} publications (see the list below)
+        {metrics.citations != null && <>; {metrics.citations} citations and h-index {metrics.h_index} ({metrics.source}, {formatDate(metrics.updated.slice(0, 7))})</>}.
+      </p>
+      {software.length > 0 && (
+        <>
+          <h3>Open-source software</h3>
+          <ul class="rows">
+            {software.map((p) => (
+              <li>
+                <span class="when">{p.period}</span>
+                <span class="what"><strong><a href={p.links?.[0]?.url}>{p.title}</a></strong> – <span class="sub">{p.description.split('. ')[0].replace(/\.$/, '')}.</span></span>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+    </section>
+
+    {funded.length > 0 && (
+      <section>
+        <h2>Research projects</h2>
+        <ul class="rows">
+          {funded.map((p) => (
+            <li>
+              <span class="when">{p.period}</span>
+              <span class="what"><strong>{p.title}</strong><br /><span class="detail">{p.description}</span></span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    <section>
+      <h2>Teaching</h2>
+      <ul class="rows">
+        {[...teaching.courses, ...(teaching.assistance || []).map((c) => ({ ...c, name: `${c.name} – teaching assistant` }))].map((c) => (
+          <li>
+            <span class="when">{c.years}</span>
+            <span class="what"><strong>{c.name}</strong>{c.credits && <span class="muted"> ({c.credits})</span>}<br /><span class="detail">{c.programme}</span></span>
+          </li>
+        ))}
+      </ul>
+      <p style="margin-top:1.5mm">{teaching.supervision.summary}</p>
+    </section>
+
+    <section>
+      <h2>Service and activities</h2>
+      {serviceGroups.map((g) => (
+        <>
+          <h3>{g.group}</h3>
+          <ul class="rows">
+            {g.items.map((it) => (
+              <li>
+                <span class="when">{it.when}</span>
+                <span class="what"><span set:html={inlineMd(it.what)} />{it.detail && <> <span class="detail">({it.detail.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')})</span></>}</span>
+              </li>
+            ))}
+          </ul>
+        </>
+      ))}
+    </section>
+
+    {profile.languages && profile.languages.length > 0 && (
+      <section>
+        <h2>Languages</h2>
+        <p>{profile.languages.join(' · ')}</p>
+      </section>
+    )}
+
+    <section>
+      <h2>Publications</h2>
+      <p class="muted">Own name underlined. Full list with links: {site && <a href={`${site}/publications/`}>{site.replace(/^https?:\/\//, '')}/publications</a>}</p>
+      {pubGroups.map((g) => (
+        <>
+          <h3>{g.title} ({g.items.length})</h3>
+          <ol class="pubs">
+            {g.items.map((p) => (
+              <li>
+                {p.authorRole === 'editors' && 'Eds.: '}
+                {p.authors.map((a, i) => (
+                  <>{i > 0 && ', '}{a.me ? <span class="me">{a.name}</span> : a.name}</>
+                ))}.{' '}
+                <span class="t">{p.title}.</span>{' '}
+                <span class="v"><em>{p.venue}</em>{p.details && `, ${p.details}`}, {p.year}.</span>
+                {doi(p) && <> <a class="d" href={doi(p)!.url}>doi:{doi(p)!.url.replace('https://doi.org/', '')}</a></>}
+                {!doi(p) && p.links.find((x) => x.label === 'arXiv') && <> <a class="d" href={p.links.find((x) => x.label === 'arXiv')!.url}>{p.links.find((x) => x.label === 'arXiv')!.url.replace('https://', '')}</a></>}
+              </li>
+            ))}
+          </ol>
+        </>
+      ))}
+    </section>
+  </body>
+</html>

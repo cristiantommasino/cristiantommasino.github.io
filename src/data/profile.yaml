@@ -135,6 +135,18 @@ education:
     where: University of Naples Federico II
     detail: "Thesis on commercial and open-source tools for log collection and analysis"
 
+# Research interests (shown in the PDF CV).
+research_interests:
+  - "Computational pathology: whole-slide image analysis, nuclei instance segmentation and classification, stain normalization, histopathology image retrieval"
+  - "Graph learning: cell-graph construction, graph and hypergraph neural networks for cancer subtyping"
+  - "Generative AI and language models: vision-language models, retrieval-augmented generation, multi-agent systems"
+  - "Knowledge representation and retrieval: knowledge graphs, ontologies, multimedia information retrieval"
+
+# Languages (shown in the PDF CV).
+languages:
+  - Italian (native)
+  - English (B2, CEFR)
+
 # Quick links (home page and footer). Leave "" to hide.
 links:
   email: cristian.tommasino@unina.it
