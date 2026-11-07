@@ -42,6 +42,7 @@ export interface Profile {
   bio_long: string[];
   collaborating_labs?: { name: string; url: string; description: string }[];
   languages?: string[];
+  google_site_verification?: string;
   research_interests?: string[];
   stats?: { value: string; label: string; note?: string }[];
   experience: TimelineItem[];

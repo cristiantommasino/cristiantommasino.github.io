@@ -32,6 +32,10 @@ tagline: Computational pathology · Graph learning · Vision-language models
 photo: images/profile.jpg
 photo_alt: Portrait of Cristian Tommasino
 
+# Google Search Console: the code from the "HTML tag" verification method, i.e. only the
+# value of content="..." in <meta name="google-site-verification" content="...">. Leave "" if unused.
+google_site_verification: ""
+
 # Short description used by search engines and social previews (max ~160 characters).
 seo_description: Cristian Tommasino is an Assistant Professor at the University of Naples Federico II working on computational pathology, graph learning and vision-language models.
 
